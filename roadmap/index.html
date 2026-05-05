@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roadmap — CommonsMC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --navy: #080e1a; --navy-card: #111e33; --navy-border: #1a2d4a; --gold: #f0a830; --gold-light: #ffe082; --gold-dim: #c97d10; --white: #f0ede8; --grey: #8a9ab5; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--white); font-family: 'Crimson Pro', Georgia, serif; font-size: 18px; line-height: 1.7; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.5) 0%, transparent 100%), radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.4) 0%, transparent 100%), radial-gradient(1px 1px at 45% 85%, rgba(255,255,255,0.3) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(8,14,26,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(240,168,48,0.15); }
+    .nav-logo { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-discord { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--navy); background: var(--gold); padding: 0.5rem 1.4rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+    .nav-discord:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    .page-hero { position: relative; z-index: 1; padding: 10rem 2rem 5rem; text-align: center; }
+    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, transparent, var(--navy)); pointer-events: none; }
+    .page-eyebrow { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .page-hero h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; color: var(--white); margin-bottom: 1rem; }
+    .page-hero h1 span { color: var(--gold); }
+    .page-hero p { font-size: 1.2rem; color: var(--grey); font-style: italic; max-width: 600px; margin: 0 auto; }
+
+    section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-label { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
+    .section-divider { width: 60px; height: 2px; background: var(--gold); margin-bottom: 2.5rem; opacity: 0.7; }
+
+    /* SERVER TABS */
+    .tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .tab { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; padding: 0.5rem 1.2rem; border-radius: 3px; cursor: pointer; text-transform: uppercase; border: 1px solid var(--navy-border); color: var(--grey); background: var(--navy-card); transition: all 0.2s; }
+    .tab:hover { border-color: rgba(240,168,48,0.3); color: var(--white); }
+    .tab.active { background: rgba(240,168,48,0.15); border-color: rgba(240,168,48,0.4); color: var(--gold); }
+
+    .roadmap-section { display: none; }
+    .roadmap-section.active { display: block; }
+
+    /* PHASE CARDS */
+    .roadmap-phases { display: flex; flex-direction: column; gap: 1.5rem; }
+    .phase-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-left: 3px solid var(--gold-dim); border-radius: 0 8px 8px 0; padding: 2rem 2.5rem; }
+    .phase-card.active-phase { border-left-color: var(--gold); }
+    .phase-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .phase-badge { font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; padding: 0.3rem 0.8rem; border-radius: 2px; text-transform: uppercase; }
+    .phase-badge.current { background: rgba(240,168,48,0.2); color: var(--gold); border: 1px solid rgba(240,168,48,0.4); }
+    .phase-badge.soon { background: rgba(26,74,138,0.3); color: #6ab0ff; border: 1px solid rgba(106,176,255,0.3); }
+    .phase-badge.planned { background: rgba(255,255,255,0.05); color: var(--grey); border: 1px solid rgba(255,255,255,0.1); }
+    .phase-badge.future { background: rgba(255,255,255,0.03); color: #555; border: 1px solid rgba(255,255,255,0.06); }
+    .phase-title { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); }
+    .phase-subtitle { font-style: italic; color: var(--grey); font-size: 0.9rem; margin-bottom: 1rem; }
+    .phase-items { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 2rem; }
+    .phase-items li { font-size: 0.9rem; color: var(--grey); display: flex; align-items: center; gap: 0.5rem; }
+    .phase-items li.done { color: var(--white); }
+    .phase-items li.done::before { content: '✓'; color: var(--gold); font-size: 0.8rem; }
+    .phase-items li.todo::before { content: '○'; color: #444; font-size: 0.8rem; }
+
+    /* PROGRESS SUMMARY */
+    .progress-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
+    .progress-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; padding: 1.5rem; text-align: center; }
+    .progress-number { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 900; color: var(--gold); display: block; }
+    .progress-label { font-size: 0.85rem; color: var(--grey); }
+
+    .sep { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--navy-border), transparent); margin: 0 auto; max-width: 1100px; }
+
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--navy-border); padding: 3rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; }
+    .footer-info { font-size: 0.85rem; color: var(--grey); text-align: center; }
+    .footer-info span { color: var(--white); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .progress-cards { grid-template-columns: 1fr 1fr; } .phase-items { grid-template-columns: 1fr; } footer { flex-direction: column; text-align: center; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">COMMONS MC</a>
+    <ul class="nav-links">
+      <li><a href="/survival/">Survival</a></li>
+      <li><a href="/skyblock/">Skyblock</a></li>
+      <li><a href="/citadel/">Citadel</a></li>
+      <li><a href="/roadmap/" class="active">Roadmap</a></li>
+      <li><a href="/staff/">Staff</a></li>
+    </ul>
+    <a href="https://discord.gg/xVwzz6EAhb" target="_blank" class="nav-discord">Join Discord</a>
+  </nav>
+
+  <div class="page-hero">
+    <p class="page-eyebrow">Development</p>
+    <h1>The <span>Roadmap</span></h1>
+    <p>Where CommonsMC is going. Transparent development, one phase at a time.</p>
+  </div>
+
+  <section>
+    <!-- PROGRESS SUMMARY -->
+    <div class="progress-cards">
+      <div class="progress-card"><span class="progress-number">6</span><span class="progress-label">Phase 1 Items Complete</span></div>
+      <div class="progress-card"><span class="progress-number">1</span><span class="progress-label">Server Live</span></div>
+      <div class="progress-card"><span class="progress-number">4</span><span class="progress-label">Phases Planned</span></div>
+    </div>
+
+    <p class="section-label">Network Roadmap</p>
+    <h2 class="section-title">The full picture.</h2>
+    <div class="section-divider"></div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('network')">🌐 Network</div>
+      <div class="tab" onclick="showTab('survival')">🌿 Survival</div>
+      <div class="tab" onclick="showTab('skyblock')">☁️ Skyblock</div>
+      <div class="tab" onclick="showTab('citadel')">⚔️ Citadel</div>
+    </div>
+
+    <!-- NETWORK TAB -->
+    <div class="roadmap-section active" id="tab-network">
+      <div class="roadmap-phases">
+        <div class="phase-card active-phase">
+          <div class="phase-header"><span class="phase-badge current">● Current</span><span class="phase-title">Phase 1 — Foundation</span></div>
+          <p class="phase-subtitle">The network is born.</p>
+          <ul class="phase-items">
+            <li class="done">Commons Survival launched</li><li class="done">Discord server built</li>
+            <li class="done">commonsmc.net live</li><li class="done">TCPShield DDoS protection</li>
+            <li class="done">Discord bot system (Creeper + Wither)</li><li class="done">LuckPerms rank system</li>
+            <li class="todo">Spawn area built</li><li class="todo">Economy configured</li>
+            <li class="todo">Warp system live</li><li class="todo">Economy configured</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header"><span class="phase-badge soon">◎ Coming Soon</span><span class="phase-title">Phase 2 — Community</span></div>
+          <p class="phase-subtitle">Players arrive. Community grows.</p>
+          <ul class="phase-items">
+            <li class="todo">Skyblock server launch</li><li class="todo">Public server listing</li>
+            <li class="todo">Social media presence</li><li class="todo">First community events</li>
+            <li class="todo">Staff team expanded</li><li class="todo">Dynmap live</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header"><span class="phase-badge planned">◇ Planned</span><span class="phase-title">Phase 3 — Expansion</span></div>
+          <p class="phase-subtitle">The network grows.</p>
+          <ul class="phase-items">
+            <li class="todo">Citadel Factions launch</li><li class="todo">BungeeCord proxy hub</li>
+            <li class="todo">Single IP for all servers</li><li class="todo">Public staff applications</li>
+            <li class="todo">Season events</li><li class="todo">Content creator program</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header"><span class="phase-badge future">◈ Future</span><span class="phase-title">Phase 4 — Network Scale</span></div>
+          <p class="phase-subtitle">CommonsMC becomes a full network.</p>
+          <ul class="phase-items">
+            <li class="todo">Dedicated server hardware upgrade</li><li class="todo">Dedicated servers per gamemode</li>
+            <li class="todo">Creative/Freebuild server</li><li class="todo">Mini-games server</li>
+            <li class="todo">Custom plugins</li><li class="todo">Colocation hosting</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SURVIVAL TAB -->
+    <div class="roadmap-section" id="tab-survival">
+      <div class="roadmap-phases">
+        <div class="phase-card active-phase">
+          <div class="phase-header"><span class="phase-badge current">● Current</span><span class="phase-title">Phase 1 — Foundation</span></div>
+          <p class="phase-subtitle">The world begins. The community takes root.</p>
+          <ul class="phase-items">
+            <li class="done">PaperMC 26.1.2 server launch</li><li class="done">Core plugins configured</li>
+            <li class="done">Discord integration (DiscordSRV)</li><li class="done">Rank system configured</li>
+            <li class="done">Land claiming (GriefPrevention)</li><li class="done">Player economy foundation</li>
+            <li class="todo">Spawn area built</li><li class="todo">Economy worth.yml</li>
+            <li class="todo">Warp system</li><li class="todo">Nether spawn structure</li>
+            <li class="todo">Member+ Discord link rank</li><li class="todo">Legacy player wall</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header"><span class="phase-badge soon">◎ Coming Soon</span><span class="phase-title">Phase 2 — Community</span></div>
+          <p class="phase-subtitle">Players make the world their own.</p>
+          <ul class="phase-items">
+            <li class="todo">Player market district</li><li class="todo">Build contests</li>
+            <li class="todo">PvP tournaments</li><li class="todo">Castle Wars events</li>
+            <li class="todo">Treasure hunts</li><li class="todo">Dynmap live map</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header"><span class="phase-badge planned">◇ Planned</span><span class="phase-title">Phase 3 — Expansion</span></div>
+          <p class="phase-subtitle">New frontiers. New challenges.</p>
+          <ul class="phase-items">
+            <li class="todo">Holiday season events</li><li class="todo">End Dragon instanced fights</li>
+            <li class="todo">Public staff applications</li><li class="todo">Content creator program</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKYBLOCK TAB -->
+    <div class="roadmap-section" id="tab-skyblock">
+      <div class="roadmap-phases">
+        <div class="phase-card">
+          <div class="phase-header"><span class="phase-badge planned">◇ Phase 1</span><span class="phase-title">Skyblock Launch</span></div>
+          <p class="phase-subtitle">The islands open.</p>
+          <ul class="phase-items">
+            <li class="todo">IridiumSkyblock installed</li><li class="todo">Skyblock Economy mode live</li>
+            <li class="todo">Co-op islands enabled</li><li class="todo">One Life mode live</li>
+            <li class="todo">Skyblock spawn island built</li><li class="todo">Season 1 begins</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header"><span class="phase-badge future">◈ Phase 2</span><span class="phase-title">One Block & Rush</span></div>
+          <p class="phase-subtitle">New challenges. Competition begins.</p>
+          <ul class="phase-items">
+            <li class="todo">One Block mode (snow biome)</li><li class="todo">Skyblock Rush Season 1</li>
+            <li class="todo">Season leaderboard on website</li><li class="todo">One Life Hall of Fame</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header"><span class="phase-badge future">◈ Phase 3</span><span class="phase-title">Expansion</span></div>
+          <p class="phase-subtitle">Deeper integration. More modes.</p>
+          <ul class="phase-items">
+            <li class="todo">Cross-server economy (Survival ↔ Skyblock)</li><li class="todo">Skyblock tournaments</li>
+            <li class="todo">Custom island schematics</li><li class="todo">More game modes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- CITADEL TAB -->
+    <div class="roadmap-section" id="tab-citadel">
+      <div class="roadmap-phases">
+        <div class="phase-card">
+          <div class="phase-header"><span class="phase-badge planned">◇ Phase 1</span><span class="phase-title">Citadel Launch</span></div>
+          <p class="phase-subtitle">Factions returns. The real way.</p>
+          <ul class="phase-items">
+            <li class="todo">PaperMC 1.8.9 server setup</li><li class="todo">FactionsUUID configured</li>
+            <li class="todo">LuckPerms no P2W ranks</li><li class="todo">mcMMO skill system</li>
+            <li class="todo">CannonLib siege mechanics</li><li class="todo">WorldBorder configured</li>
+            <li class="todo">Spawn, warzone, market built</li><li class="todo">TCPShield protection</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header"><span class="phase-badge future">◈ Phase 2</span><span class="phase-title">citadelsmp.net Live</span></div>
+          <p class="phase-subtitle">Citadel gets its own identity.</p>
+          <ul class="phase-items">
+            <li class="todo">citadelsmp.net website live</li><li class="todo">Citadel Discord integration</li>
+            <li class="todo">Season 1 begins</li><li class="todo">Faction leaderboards on website</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">COMMONS MC</div>
+    <div class="footer-info"><span>play.commonsmc.net</span> · <span>commonsmc.net</span><br/><span style="font-size:0.75rem; color:#444;">© 2026 CommonsMC. A forever world.</span></div>
+    <div class="footer-links">
+      <a href="/">Home</a><a href="/survival/">Survival</a><a href="/skyblock/">Skyblock</a>
+      <a href="/citadel/">Citadel</a><a href="/staff/">Staff</a>
+      <a href="https://discord.gg/xVwzz6EAhb" target="_blank">Discord</a>
+    </div>
+  </footer>
+
+  <script>
+    function showTab(name) {
+      document.querySelectorAll('.roadmap-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
