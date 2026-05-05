@@ -17,16 +17,10 @@
       --gold-dim:   #c97d10;
       --white:      #f0ede8;
       --grey:       #8a9ab5;
-      --mc-bg:      #1a1a1a;
-      --mc-border:  #555;
-      --mc-header:  #2a2a2a;
-      --mc-blue:    #5b9bd5;
       --mc-green:   #55aa55;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--navy);
       color: var(--white);
@@ -35,8 +29,6 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
-
-    /* ── STARS ── */
     body::before {
       content: '';
       position: fixed;
@@ -49,9 +41,7 @@
         radial-gradient(1px 1px at 70% 35%, rgba(255,255,255,0.5) 0%, transparent 100%),
         radial-gradient(1.5px 1.5px at 85% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
         radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
-        radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 60% 50%, rgba(255,255,255,0.2) 0%, transparent 100%),
-        radial-gradient(1px 1px at 35% 40%, rgba(255,255,255,0.3) 0%, transparent 100%);
+        radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.4) 0%, transparent 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -69,7 +59,6 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(240,168,48,0.15);
     }
-
     .nav-logo {
       font-family: 'Cinzel', serif;
       font-size: 1.2rem;
@@ -78,25 +67,22 @@
       letter-spacing: 0.15em;
       text-decoration: none;
     }
-
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--grey);
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--gold); }
-
+    .nav-links a.active { color: var(--gold); }
     .nav-discord {
       font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       color: var(--navy);
@@ -106,7 +92,6 @@
       text-decoration: none;
       transition: background 0.2s, transform 0.2s;
     }
-
     .nav-discord:hover { background: var(--gold-light); transform: translateY(-1px); }
 
     /* ── HERO ── */
@@ -121,7 +106,6 @@
       padding: 8rem 2rem 4rem;
       z-index: 1;
     }
-
     .hero::after {
       content: '';
       position: absolute;
@@ -130,7 +114,6 @@
       background: linear-gradient(to bottom, transparent, var(--navy));
       pointer-events: none;
     }
-
     .hero-glow {
       position: absolute;
       top: 50%; left: 50%;
@@ -139,7 +122,6 @@
       background: radial-gradient(ellipse, rgba(26,74,138,0.35) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .hero-eyebrow {
       font-family: 'Cinzel', serif;
       font-size: 0.7rem;
@@ -150,7 +132,6 @@
       opacity: 0;
       animation: fadeUp 0.8s ease forwards 0.2s;
     }
-
     .hero h1 {
       font-family: 'Cinzel', serif;
       font-size: clamp(3rem, 8vw, 6.5rem);
@@ -161,9 +142,7 @@
       opacity: 0;
       animation: fadeUp 0.8s ease forwards 0.4s;
     }
-
     .hero h1 span { color: var(--gold); }
-
     .hero-sub {
       font-family: 'Crimson Pro', serif;
       font-size: clamp(1.1rem, 2.5vw, 1.5rem);
@@ -173,7 +152,6 @@
       opacity: 0;
       animation: fadeUp 0.8s ease forwards 0.6s;
     }
-
     .hero-tagline {
       font-family: 'Cinzel', serif;
       font-size: clamp(0.9rem, 2vw, 1.1rem);
@@ -184,9 +162,7 @@
       animation: fadeUp 0.8s ease forwards 0.7s;
     }
 
-    /* ══════════════════════════════════════════
-       COMBINED MINECRAFT WIDGET
-    ══════════════════════════════════════════ */
+    /* ── MC WIDGET ── */
     .mc-widget {
       width: 560px;
       max-width: 92vw;
@@ -196,8 +172,6 @@
       cursor: pointer;
       font-family: 'Courier New', monospace;
     }
-
-    /* ── MINECRAFT SCREEN WRAPPER ── */
     .mc-screen {
       background: #1c1c1c;
       border: 3px solid #555;
@@ -206,8 +180,6 @@
       overflow: hidden;
       position: relative;
     }
-
-    /* Minecraft dirt/stone repeating pixel background */
     .mc-screen-bg {
       position: absolute;
       inset: 0;
@@ -219,8 +191,6 @@
       opacity: 0.3;
       pointer-events: none;
     }
-
-    /* Title bar */
     .mc-title-bar {
       background: linear-gradient(180deg, #3a3a3a 0%, #252525 100%);
       border-bottom: 2px solid #444;
@@ -233,15 +203,7 @@
       z-index: 1;
       text-shadow: 2px 2px 0 #000;
     }
-
-    /* Server list area */
-    .mc-server-list {
-      padding: 0.5rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Single server entry row */
+    .mc-server-list { padding: 0.5rem; position: relative; z-index: 1; }
     .mc-server-entry {
       background: rgba(0,0,0,0.5);
       border: 2px solid transparent;
@@ -253,16 +215,9 @@
       transition: border-color 0.15s, background 0.15s;
       position: relative;
     }
-
-    .mc-screen:hover .mc-server-entry {
-      border-color: var(--gold);
-      background: rgba(240,168,48,0.06);
-    }
-
-    /* Server icon */
+    .mc-screen:hover .mc-server-entry { border-color: var(--gold); background: rgba(240,168,48,0.06); }
     .mc-server-icon {
-      width: 56px;
-      height: 56px;
+      width: 56px; height: 56px;
       flex-shrink: 0;
       background: linear-gradient(135deg, #1a3a6a 0%, #0d1f3c 100%);
       border: 2px solid #444;
@@ -274,100 +229,30 @@
       font-size: 1.4rem;
       font-weight: 900;
       color: var(--gold);
-      image-rendering: pixelated;
       text-shadow: 2px 2px 0 #000;
     }
-
-    /* Server info text */
     .mc-server-info { flex: 1; text-align: left; min-width: 0; }
-
-    .mc-server-name {
-      font-size: 0.85rem;
-      color: #ffffff;
-      font-weight: 700;
-      margin-bottom: 0.15rem;
-      text-shadow: 1px 1px 0 #000;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
+    .mc-server-name { font-size: 0.85rem; color: #fff; font-weight: 700; margin-bottom: 0.15rem; text-shadow: 1px 1px 0 #000; }
     .mc-server-name .name-green { color: var(--mc-green); }
-
-    .mc-server-motd-1 {
-      font-size: 0.72rem;
-      color: #aaaaaa;
-      text-shadow: 1px 1px 0 #000;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .mc-server-motd-2 {
-      font-size: 0.72rem;
-      color: #888888;
-      text-shadow: 1px 1px 0 #000;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Ping + players top right */
-    .mc-server-meta {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.25rem;
-      flex-shrink: 0;
-    }
-
-    .mc-ping-bars {
-      display: flex;
-      align-items: flex-end;
-      gap: 1.5px;
-      height: 14px;
-    }
-
-    .mc-ping-bars span {
-      width: 3px;
-      border-radius: 1px;
-    }
-
+    .mc-server-motd-1 { font-size: 0.72rem; color: #aaa; text-shadow: 1px 1px 0 #000; }
+    .mc-server-motd-2 { font-size: 0.72rem; color: #888; text-shadow: 1px 1px 0 #000; }
+    .mc-server-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; flex-shrink: 0; }
+    .mc-ping-bars { display: flex; align-items: flex-end; gap: 1.5px; height: 14px; }
+    .mc-ping-bars span { width: 3px; border-radius: 1px; }
     .mc-ping-bars span:nth-child(1) { height: 3px; }
     .mc-ping-bars span:nth-child(2) { height: 5px; }
     .mc-ping-bars span:nth-child(3) { height: 8px; }
     .mc-ping-bars span:nth-child(4) { height: 11px; }
     .mc-ping-bars span:nth-child(5) { height: 14px; }
-
     .mc-ping-bars.online span { background: var(--mc-green); }
     .mc-ping-bars.offline span { background: #555; }
     .mc-ping-bars.offline span:last-child { background: #e05555; }
-
-    .mc-player-count {
-      font-size: 0.62rem;
-      color: #888;
-      text-shadow: 1px 1px 0 #000;
-      white-space: nowrap;
-    }
-
+    .mc-player-count { font-size: 0.62rem; color: #888; text-shadow: 1px 1px 0 #000; }
     .mc-player-count.online { color: #aaa; }
     .mc-player-count.offline { color: #e05555; }
-
-    /* Status indicator dot */
-    .mc-status-dot {
-      position: absolute;
-      top: 0.4rem;
-      right: 0.4rem;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #555;
-    }
-
+    .mc-status-dot { position: absolute; top: 0.4rem; right: 0.4rem; width: 7px; height: 7px; border-radius: 50%; background: #555; }
     .mc-status-dot.online { background: var(--mc-green); box-shadow: 0 0 6px var(--mc-green); }
     .mc-status-dot.offline { background: #e05555; }
-
-    /* Button row */
     .mc-button-row {
       background: linear-gradient(180deg, #252525 0%, #1a1a1a 100%);
       border-top: 2px solid #444;
@@ -377,7 +262,6 @@
       position: relative;
       z-index: 1;
     }
-
     .mc-btn {
       flex: 1;
       background: linear-gradient(180deg, #5a5a5a 0%, #3a3a3a 100%);
@@ -392,13 +276,9 @@
       cursor: pointer;
       text-shadow: 1px 1px 0 #000;
       transition: filter 0.1s;
-      letter-spacing: 0.03em;
     }
-
     .mc-btn:hover { filter: brightness(1.2); }
     .mc-btn.highlight { border-color: var(--gold); color: var(--gold); }
-
-    /* ── DIRECT CONNECT PANEL (bottom half) ── */
     .mc-connect-panel {
       background: #1c1c1c;
       border: 3px solid #555;
@@ -407,7 +287,6 @@
       padding: 0.8rem 1rem;
       position: relative;
     }
-
     .mc-connect-panel::before {
       content: '';
       position: absolute;
@@ -420,16 +299,7 @@
       pointer-events: none;
       border-radius: 0 0 4px 4px;
     }
-
-    .mc-connect-label {
-      font-size: 0.7rem;
-      color: #aaa;
-      margin-bottom: 0.3rem;
-      text-shadow: 1px 1px 0 #000;
-      position: relative;
-      z-index: 1;
-    }
-
+    .mc-connect-label { font-size: 0.7rem; color: #aaa; margin-bottom: 0.3rem; text-shadow: 1px 1px 0 #000; position: relative; z-index: 1; }
     .mc-address-box {
       background: #000;
       border: 2px solid #888;
@@ -447,39 +317,23 @@
       align-items: center;
       position: relative;
       z-index: 1;
-      text-shadow: 1px 1px 0 #000;
     }
-
     .mc-typed-text { color: #fff; }
-
     .mc-cursor {
       display: inline-block;
-      width: 2px;
-      height: 1em;
+      width: 2px; height: 1em;
       background: #fff;
       margin-left: 1px;
       animation: blink 0.7s step-end infinite;
       vertical-align: middle;
     }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0; }
-    }
-
-    .mc-done-row {
-      display: flex;
-      gap: 0.4rem;
-      position: relative;
-      z-index: 1;
-    }
-
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    .mc-done-row { display: flex; gap: 0.4rem; position: relative; z-index: 1; }
     .mc-done-btn {
       flex: 1;
       background: linear-gradient(180deg, #5a5a5a 0%, #3a3a3a 100%);
       border: 2px solid #888;
-      border-bottom-color: #222;
-      border-right-color: #222;
+      border-bottom-color: #222; border-right-color: #222;
       border-radius: 2px;
       color: #fff;
       font-family: 'Courier New', monospace;
@@ -489,22 +343,13 @@
       cursor: pointer;
       transition: border-color 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
       text-shadow: 1px 1px 0 #000;
-      letter-spacing: 0.03em;
     }
-
-    .mc-done-btn.pulse {
-      border-color: var(--gold);
-      box-shadow: 0 0 16px rgba(240,168,48,0.5);
-      background: linear-gradient(180deg, #7a6030 0%, #4a3a1a 100%);
-      color: var(--gold);
-    }
-
+    .mc-done-btn.pulse { border-color: var(--gold); box-shadow: 0 0 16px rgba(240,168,48,0.5); background: linear-gradient(180deg, #7a6030 0%, #4a3a1a 100%); color: var(--gold); }
     .mc-cancel-btn {
       flex: 1;
       background: linear-gradient(180deg, #4a4a4a 0%, #2a2a2a 100%);
       border: 2px solid #666;
-      border-bottom-color: #111;
-      border-right-color: #111;
+      border-bottom-color: #111; border-right-color: #111;
       border-radius: 2px;
       color: #aaa;
       font-family: 'Courier New', monospace;
@@ -512,29 +357,16 @@
       padding: 0.35rem;
       text-align: center;
       cursor: pointer;
-      text-shadow: 1px 1px 0 #000;
       transition: filter 0.1s;
     }
-
     .mc-cancel-btn:hover { filter: brightness(1.15); }
-
-    /* Hover hint below widget */
-    .mc-hint {
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      color: rgba(240,168,48,0.5);
-      margin-top: 0.6rem;
-      transition: color 0.2s;
-    }
-
+    .mc-hint { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.15em; color: rgba(240,168,48,0.5); margin-top: 0.6rem; transition: color 0.2s; }
     .mc-widget:hover .mc-hint { color: var(--gold); }
 
     /* ── COPY TOAST ── */
     .copy-toast {
       position: fixed;
-      bottom: 2rem;
-      left: 50%;
+      bottom: 2rem; left: 50%;
       transform: translateX(-50%) translateY(10px);
       background: var(--gold);
       color: var(--navy);
@@ -549,265 +381,82 @@
       pointer-events: none;
       z-index: 999;
     }
-
     .copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ── HERO BUTTONS ── */
+    /* ── BUTTONS ── */
     .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 1.1s;
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 1.1s;
     }
-
     .btn-primary {
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--navy);
-      background: var(--gold);
-      padding: 0.9rem 2.5rem;
-      border-radius: 3px;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
+      font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--navy); background: var(--gold);
+      padding: 0.9rem 2.5rem; border-radius: 3px;
+      text-decoration: none; border: none; cursor: pointer;
       transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
       box-shadow: 0 4px 20px rgba(240,168,48,0.3);
     }
-
-    .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(240,168,48,0.4);
-    }
-
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(240,168,48,0.4); }
     .btn-secondary {
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: transparent;
-      padding: 0.9rem 2.5rem;
-      border-radius: 3px;
-      text-decoration: none;
-      border: 1px solid rgba(240,168,48,0.4);
-      cursor: pointer;
+      font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); background: transparent;
+      padding: 0.9rem 2.5rem; border-radius: 3px;
+      text-decoration: none; border: 1px solid rgba(240,168,48,0.4); cursor: pointer;
       transition: border-color 0.2s, background 0.2s, transform 0.15s;
     }
-
-    .btn-secondary:hover {
-      border-color: var(--gold);
-      background: rgba(240,168,48,0.08);
-      transform: translateY(-2px);
-    }
+    .btn-secondary:hover { border-color: var(--gold); background: rgba(240,168,48,0.08); transform: translateY(-2px); }
 
     /* ── SECTIONS ── */
-    section {
-      position: relative;
-      z-index: 1;
-      padding: 6rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    section { position: relative; z-index: 1; padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-label { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
+    .section-divider { width: 60px; height: 2px; background: var(--gold); margin-bottom: 2.5rem; opacity: 0.7; }
 
-    .section-label {
-      font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.8rem;
-    }
-
-    .section-title {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 1rem;
-      line-height: 1.2;
-    }
-
-    .section-divider {
-      width: 60px;
-      height: 2px;
-      background: var(--gold);
-      margin-bottom: 2.5rem;
-      opacity: 0.7;
-    }
-
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .about-text p { color: var(--grey); font-size: 1.1rem; margin-bottom: 1.2rem; line-height: 1.8; }
-    .about-text p strong { color: var(--white); font-weight: 600; }
-
-    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-
-    .stat-card {
+    /* ── SERVER CARDS ── */
+    .server-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .server-card {
       background: var(--navy-card);
       border: 1px solid var(--navy-border);
-      border-radius: 6px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .stat-card:hover { border-color: rgba(240,168,48,0.4); transform: translateY(-3px); }
-
-    .stat-number {
-      font-family: 'Cinzel', serif;
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--gold);
+      border-radius: 10px;
+      padding: 2.5rem 2rem;
+      text-decoration: none;
       display: block;
-    }
-
-    .stat-label { font-size: 0.85rem; color: var(--grey); margin-top: 0.2rem; }
-
-    /* ── FEATURES ── */
-    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-
-    .feature-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 8px;
-      padding: 2rem 1.5rem;
       transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
     }
-
-    .feature-card:hover {
-      border-color: rgba(240,168,48,0.35);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    .server-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      opacity: 0;
+      transition: opacity 0.2s;
     }
-
-    .feature-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
-
-    .feature-title {
-      font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.05em;
-    }
-
-    .feature-desc { font-size: 0.95rem; color: var(--grey); line-height: 1.6; }
-
-    /* ── ROADMAP ── */
-    .roadmap-phases { display: flex; flex-direction: column; gap: 2rem; }
-
-    .phase-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-left: 3px solid var(--gold-dim);
-      border-radius: 0 8px 8px 0;
-      padding: 2rem 2.5rem;
-      transition: border-left-color 0.2s;
-    }
-
-    .phase-card.active { border-left-color: var(--gold); }
-
-    .phase-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
-
-    .phase-badge {
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      padding: 0.3rem 0.8rem;
-      border-radius: 2px;
-      text-transform: uppercase;
-    }
-
-    .phase-badge.current { background: rgba(240,168,48,0.2); color: var(--gold); border: 1px solid rgba(240,168,48,0.4); }
-    .phase-badge.soon { background: rgba(26,74,138,0.3); color: #6ab0ff; border: 1px solid rgba(106,176,255,0.3); }
-    .phase-badge.planned { background: rgba(255,255,255,0.05); color: var(--grey); border: 1px solid rgba(255,255,255,0.1); }
-    .phase-badge.future { background: rgba(255,255,255,0.03); color: #555; border: 1px solid rgba(255,255,255,0.06); }
-
-    .phase-title { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); }
-    .phase-subtitle { font-style: italic; color: var(--grey); font-size: 0.9rem; margin-bottom: 1rem; }
-
-    .phase-items { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 2rem; }
-
-    .phase-items li { font-size: 0.9rem; color: var(--grey); display: flex; align-items: center; gap: 0.5rem; }
-    .phase-items li.done { color: var(--white); }
-    .phase-items li.done::before { content: '✓'; color: var(--gold); font-size: 0.8rem; }
-    .phase-items li.todo::before { content: '○'; color: #444; font-size: 0.8rem; }
-
-    /* ── GAMEMODES ── */
-    .gamemodes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-
-    .gamemode-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 8px;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .gamemode-card:hover { border-color: rgba(240,168,48,0.3); transform: translateY(-3px); }
-
-    .gamemode-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
-
-    .gamemode-name { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
-    .gamemode-desc { font-size: 0.9rem; color: var(--grey); margin-bottom: 1rem; line-height: 1.5; }
-
-    .status-badge {
-      display: inline-block;
-      font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      padding: 0.25rem 0.7rem;
-      border-radius: 2px;
-      text-transform: uppercase;
-    }
-
+    .server-card:hover { border-color: rgba(240,168,48,0.4); transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
+    .server-card:hover::before { opacity: 1; }
+    .server-card-icon { font-size: 2.8rem; margin-bottom: 1.2rem; display: block; }
+    .server-card-name { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .server-card-desc { font-size: 0.95rem; color: var(--grey); line-height: 1.6; margin-bottom: 1.2rem; }
+    .server-card-status { display: inline-block; font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; padding: 0.25rem 0.7rem; border-radius: 2px; text-transform: uppercase; }
     .status-live { background: rgba(90,180,90,0.15); color: #5ab45a; border: 1px solid rgba(90,180,90,0.3); }
     .status-planned { background: rgba(255,255,255,0.05); color: var(--grey); border: 1px solid rgba(255,255,255,0.1); }
     .status-concept { background: rgba(255,255,255,0.03); color: #444; border: 1px solid rgba(255,255,255,0.06); }
+    .server-card-arrow { position: absolute; bottom: 1.5rem; right: 1.5rem; color: rgba(240,168,48,0.3); font-size: 1.2rem; transition: color 0.2s, transform 0.2s; }
+    .server-card:hover .server-card-arrow { color: var(--gold); transform: translateX(3px); }
 
-    /* ── STAFF ── */
-    .staff-grid { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-
-    .staff-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 8px;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      width: 220px;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .staff-card:hover { border-color: rgba(240,168,48,0.4); transform: translateY(-4px); }
-
-    .staff-head {
-      width: 72px; height: 72px;
-      border-radius: 4px;
-      margin: 0 auto 1rem;
-      border: 2px solid var(--navy-border);
-      display: block;
-      image-rendering: pixelated;
-    }
-
-    .staff-name { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
-    .staff-role { font-size: 0.75rem; color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 0.1em; margin-bottom: 0.8rem; }
-    .staff-quote { font-size: 0.85rem; color: var(--grey); font-style: italic; line-height: 1.5; }
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-text p { color: var(--grey); font-size: 1.1rem; margin-bottom: 1.2rem; line-height: 1.8; }
+    .about-text p strong { color: var(--white); font-weight: 600; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .stat-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 6px; padding: 1.5rem; text-align: center; transition: border-color 0.2s, transform 0.2s; }
+    .stat-card:hover { border-color: rgba(240,168,48,0.4); transform: translateY(-3px); }
+    .stat-number { font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 900; color: var(--gold); display: block; }
+    .stat-label { font-size: 0.85rem; color: var(--grey); margin-top: 0.2rem; }
 
     /* ── PROMISE ── */
     .promise-section {
@@ -819,16 +468,6 @@
       position: relative;
       overflow: hidden;
     }
-
-    .promise-section::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: radial-gradient(ellipse at center, rgba(240,168,48,0.04) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
     .promise-section h2 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900; color: var(--white); margin-bottom: 1.5rem; }
     .promise-section h2 span { color: var(--gold); }
     .promise-section p { font-size: 1.15rem; color: var(--grey); max-width: 680px; margin: 0 auto 2rem; line-height: 1.8; font-style: italic; }
@@ -840,17 +479,11 @@
 
     /* ── FOOTER ── */
     footer {
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
       border-top: 1px solid var(--navy-border);
       padding: 3rem 4rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
     }
-
     .footer-logo { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; }
     .footer-info { font-size: 0.85rem; color: var(--grey); text-align: center; }
     .footer-info span { color: var(--white); }
@@ -858,26 +491,15 @@
     .footer-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--gold); }
 
-    .sep {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--navy-border), transparent);
-      margin: 0 auto;
-      max-width: 1100px;
-    }
+    .sep { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--navy-border), transparent); margin: 0 auto; max-width: 1100px; }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
+      .server-cards { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .features-grid { grid-template-columns: 1fr; }
-      .gamemodes-grid { grid-template-columns: 1fr 1fr; }
-      .phase-items { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; }
       .promise-section { padding: 2.5rem 1.5rem; }
     }
@@ -885,31 +507,26 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">COMMONS MC</a>
+    <a href="/" class="nav-logo">COMMONS MC</a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#roadmap">Roadmap</a></li>
-      <li><a href="#gamemodes">Gamemodes</a></li>
-      <li><a href="#staff">Staff</a></li>
+      <li><a href="/survival/" >Survival</a></li>
+      <li><a href="/skyblock/">Skyblock</a></li>
+      <li><a href="/citadel/">Citadel</a></li>
+      <li><a href="/roadmap/">Roadmap</a></li>
+      <li><a href="/staff/">Staff</a></li>
     </ul>
     <a href="https://discord.gg/xVwzz6EAhb" target="_blank" class="nav-discord">Join Discord</a>
   </nav>
 
-  <!-- HERO -->
   <div class="hero">
     <div class="hero-glow"></div>
-    <p class="hero-eyebrow">Commons Survival — A Forever World</p>
+    <p class="hero-eyebrow">Welcome to the Network</p>
     <h1>COMMONS<span>MC</span></h1>
     <p class="hero-sub">A server worth calling home.</p>
     <p class="hero-tagline">Where everyone has a place.</p>
 
-    <!-- ══ COMBINED MC WIDGET ══ -->
     <div class="mc-widget" onclick="copyIP()" title="Click to copy IP">
-
-      <!-- TOP: Minecraft server list screen -->
       <div class="mc-screen">
         <div class="mc-screen-bg"></div>
         <div class="mc-title-bar">Play Multiplayer</div>
@@ -923,9 +540,7 @@
               <div class="mc-server-motd-2">play.commonsmc.net · commonsmc.net</div>
             </div>
             <div class="mc-server-meta">
-              <div class="mc-ping-bars" id="pingBars">
-                <span></span><span></span><span></span><span></span><span></span>
-              </div>
+              <div class="mc-ping-bars" id="pingBars"><span></span><span></span><span></span><span></span><span></span></div>
               <div class="mc-player-count" id="playerCount">Checking...</div>
             </div>
           </div>
@@ -938,8 +553,6 @@
           <div class="mc-btn">Delete</div>
         </div>
       </div>
-
-      <!-- BOTTOM: Direct connect panel with typewriter -->
       <div class="mc-connect-panel">
         <div class="mc-connect-label">Server Address</div>
         <div class="mc-address-box">
@@ -951,9 +564,7 @@
           <div class="mc-cancel-btn">Cancel</div>
         </div>
       </div>
-
     </div>
-    <!-- hint -->
     <p class="mc-hint">▸ CLICK ANYWHERE ON THE WIDGET TO COPY IP</p>
 
     <div class="hero-buttons">
@@ -963,6 +574,37 @@
   </div>
 
   <div class="copy-toast" id="copyToast">IP Copied!</div>
+
+  <!-- SERVERS -->
+  <div class="sep"></div>
+  <section>
+    <p class="section-label">The Network</p>
+    <h2 class="section-title">Choose your adventure.</h2>
+    <div class="section-divider"></div>
+    <div class="server-cards">
+      <a href="/survival/" class="server-card">
+        <span class="server-card-icon">🌿</span>
+        <div class="server-card-name">Commons Survival</div>
+        <div class="server-card-desc">A permanent community SMP. Build, claim, trade and thrive in a world that never resets.</div>
+        <span class="server-card-status status-live">● Live</span>
+        <span class="server-card-arrow">→</span>
+      </a>
+      <a href="/skyblock/" class="server-card">
+        <span class="server-card-icon">☁️</span>
+        <div class="server-card-name">Skyblock</div>
+        <div class="server-card-desc">Five unique Skyblock modes — from casual economy islands to hardcore one-life challenges.</div>
+        <span class="server-card-status status-planned">◇ Planned</span>
+        <span class="server-card-arrow">→</span>
+      </a>
+      <a href="/citadel/" class="server-card">
+        <span class="server-card-icon">⚔️</span>
+        <div class="server-card-name">Citadel Factions</div>
+        <div class="server-card-desc">Authentic no P2W factions. 2016–2018 style gameplay. Build your faction. Conquer all.</div>
+        <span class="server-card-status status-planned">◇ Planned</span>
+        <span class="server-card-arrow">→</span>
+      </a>
+    </div>
+  </section>
 
   <!-- ABOUT -->
   <div class="sep"></div>
@@ -985,87 +627,6 @@
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <div class="sep"></div>
-  <section id="features">
-    <p class="section-label">Why CommonsMC</p>
-    <h2 class="section-title">Everything you need.<br/>Nothing you don't.</h2>
-    <div class="section-divider"></div>
-    <div class="features-grid">
-      <div class="feature-card"><span class="feature-icon">🛡️</span><div class="feature-title">Land Claiming</div><div class="feature-desc">Protect your builds with GriefPrevention. Claim land, trust friends, and keep your creations safe.</div></div>
-      <div class="feature-card"><span class="feature-icon">💰</span><div class="feature-title">Player Economy</div><div class="feature-desc">Buy and sell with a player-driven economy. Set up chest shops, earn coins, and trade with the community.</div></div>
-      <div class="feature-card"><span class="feature-icon">⚔️</span><div class="feature-title">No Pay to Win</div><div class="feature-desc">Every advantage is earned in-game. No donation perks that affect gameplay. Ever.</div></div>
-      <div class="feature-card"><span class="feature-icon">🏠</span><div class="feature-title">No Kits</div><div class="feature-desc">Start fresh and earn everything yourself. The satisfaction of progress is real here.</div></div>
-      <div class="feature-card"><span class="feature-icon">💬</span><div class="feature-title">Discord Integration</div><div class="feature-desc">Chat bridges, rank sync, and server notifications all connected to our Discord community.</div></div>
-      <div class="feature-card"><span class="feature-icon">🌍</span><div class="feature-title">Forever World</div><div class="feature-desc">This world never resets. Your builds, your history, your legacy — preserved permanently.</div></div>
-    </div>
-  </section>
-
-  <!-- ROADMAP -->
-  <div class="sep"></div>
-  <section id="roadmap">
-    <p class="section-label">Development</p>
-    <h2 class="section-title">The Road Ahead.</h2>
-    <div class="section-divider"></div>
-    <div class="roadmap-phases">
-      <div class="phase-card active">
-        <div class="phase-header"><span class="phase-badge current">● Current</span><span class="phase-title">Phase 1 — Foundation</span></div>
-        <p class="phase-subtitle">The world begins. The community takes root.</p>
-        <ul class="phase-items">
-          <li class="done">Server launch on PaperMC 26.1.2</li><li class="done">Core plugins configured</li>
-          <li class="done">Discord integration</li><li class="done">Rank system</li>
-          <li class="done">Land claiming system</li><li class="done">DDoS protection via TCPShield</li>
-          <li class="todo">Spawn area build</li><li class="todo">Economy worth.yml</li>
-          <li class="todo">Warp system</li><li class="todo">Nether spawn structure</li>
-        </ul>
-      </div>
-      <div class="phase-card">
-        <div class="phase-header"><span class="phase-badge soon">◎ Coming Soon</span><span class="phase-title">Phase 2 — Community</span></div>
-        <p class="phase-subtitle">The commons grows. Players make it their own.</p>
-        <ul class="phase-items">
-          <li class="todo">Player market district open</li><li class="todo">Community events begin</li>
-          <li class="todo">Build contests</li><li class="todo">PvP tournaments</li>
-          <li class="todo">Castle Wars events</li><li class="todo">Treasure hunts</li>
-          <li class="todo">Dynmap live</li><li class="todo">Staff team expanded</li>
-        </ul>
-      </div>
-      <div class="phase-card">
-        <div class="phase-header"><span class="phase-badge planned">◇ Planned</span><span class="phase-title">Phase 3 — Expansion</span></div>
-        <p class="phase-subtitle">New frontiers. New challenges.</p>
-        <ul class="phase-items">
-          <li class="todo">Citadel Factions launch</li><li class="todo">Skyblock launch</li>
-          <li class="todo">BungeeCord proxy</li><li class="todo">Season events</li>
-          <li class="todo">Full website launch</li><li class="todo">Public staff applications</li>
-        </ul>
-      </div>
-      <div class="phase-card">
-        <div class="phase-header"><span class="phase-badge future">◈ Future</span><span class="phase-title">Phase 4 — Network</span></div>
-        <p class="phase-subtitle">CommonsMC becomes a full network.</p>
-        <ul class="phase-items">
-          <li class="todo">Dedicated server hardware</li><li class="todo">Creative/Freebuild server</li>
-          <li class="todo">Mini-games server</li><li class="todo">Custom plugins</li>
-          <li class="todo">Content creator program</li><li class="todo">Colocation hosting</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- GAMEMODES -->
-  <div class="sep"></div>
-  <section id="gamemodes">
-    <p class="section-label">The Network</p>
-    <h2 class="section-title">More ways to play.</h2>
-    <div class="section-divider"></div>
-    <div class="gamemodes-grid">
-      <div class="gamemode-card"><span class="gamemode-icon">🌿</span><div class="gamemode-name">Commons Survival</div><div class="gamemode-desc">Permanent community SMP. A forever world that never resets.</div><span class="status-badge status-live">● Live</span></div>
-      <div class="gamemode-card"><span class="gamemode-icon">⚔️</span><div class="gamemode-name">Citadel Factions</div><div class="gamemode-desc">Authentic no P2W factions. 2016–2018 style gameplay.</div><span class="status-badge status-planned">◇ Planned</span></div>
-      <div class="gamemode-card"><span class="gamemode-icon">☁️</span><div class="gamemode-name">Skyblock</div><div class="gamemode-desc">Classic skyblock survival on your own island in the sky.</div><span class="status-badge status-planned">◇ Planned</span></div>
-      <div class="gamemode-card"><span class="gamemode-icon">🏗️</span><div class="gamemode-name">Creative</div><div class="gamemode-desc">Freebuild creative server for builders and architects.</div><span class="status-badge status-concept">◈ Concept</span></div>
-      <div class="gamemode-card"><span class="gamemode-icon">🎮</span><div class="gamemode-name">Mini-games</div><div class="gamemode-desc">Seasonal mini-game events and competitive play.</div><span class="status-badge status-concept">◈ Concept</span></div>
-      <div class="gamemode-card"><span class="gamemode-icon">🏰</span><div class="gamemode-name">Castle Wars</div><div class="gamemode-desc">Two teams build and siege. LARP-style castle warfare events.</div><span class="status-badge status-concept">◈ Concept</span></div>
-    </div>
-  </section>
-
   <!-- PROMISE -->
   <div class="sep"></div>
   <section>
@@ -1073,22 +634,6 @@
       <h2>The <span>Forever World</span> Promise</h2>
       <p>Commons Survival will never reset. Your builds, your claims, your history — preserved forever. As the game evolves, so does our world. New chunks generate with new updates, the map expands, and the community continues to shape the world together.</p>
       <p style="font-style:normal; color: var(--white); font-family: 'Cinzel', serif; letter-spacing: 0.1em; font-size: 1rem;">This is your home.</p>
-    </div>
-  </section>
-
-  <!-- STAFF -->
-  <div class="sep"></div>
-  <section id="staff">
-    <p class="section-label">The Team</p>
-    <h2 class="section-title">Meet the staff.</h2>
-    <div class="section-divider"></div>
-    <div class="staff-grid">
-      <div class="staff-card">
-        <img class="staff-head" src="https://mc-heads.net/avatar/BusiestLine7/72" alt="BusiestLine7"/>
-        <div class="staff-name">BusiestLine7</div>
-        <div class="staff-role">👑 Owner</div>
-        <div class="staff-quote">"Founder of CommonsMC, building a community worth calling home."</div>
-      </div>
     </div>
   </section>
 
@@ -1104,7 +649,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">COMMONS MC</div>
     <div class="footer-info">
@@ -1112,14 +656,16 @@
       <span style="font-size:0.75rem; color:#444;">© 2026 CommonsMC. A forever world.</span>
     </div>
     <div class="footer-links">
+      <a href="/survival/">Survival</a>
+      <a href="/skyblock/">Skyblock</a>
+      <a href="/citadel/">Citadel</a>
+      <a href="/roadmap/">Roadmap</a>
+      <a href="/staff/">Staff</a>
       <a href="https://discord.gg/xVwzz6EAhb" target="_blank">Discord</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#staff">Staff</a>
     </div>
   </footer>
 
   <script>
-    // ── Copy IP ──
     function copyIP() {
       navigator.clipboard.writeText('play.commonsmc.net').then(() => {
         const toast = document.getElementById('copyToast');
@@ -1127,71 +673,46 @@
         setTimeout(() => toast.classList.remove('show'), 2500);
       });
     }
-
-    // ── Typewriter ──
     const IP = 'play.commonsmc.net';
     const typedText = document.getElementById('typedText');
-    const doneBtn   = document.getElementById('mcDoneBtn');
+    const doneBtn = document.getElementById('mcDoneBtn');
     let typeIndex = 0;
-    let typing = true;
-
     function typeWriter() {
       if (typeIndex < IP.length) {
-        typedText.textContent += IP[typeIndex];
-        typeIndex++;
+        typedText.textContent += IP[typeIndex++];
         setTimeout(typeWriter, 80);
       } else {
         doneBtn.classList.add('pulse');
-        setTimeout(() => {
-          doneBtn.classList.remove('pulse');
-          typing = false;
-          setTimeout(eraseWriter, 1500);
-        }, 1500);
+        setTimeout(() => { doneBtn.classList.remove('pulse'); typeIndex = IP.length; setTimeout(eraseWriter, 1500); }, 1500);
       }
     }
-
     function eraseWriter() {
-      if (typeIndex > 0) {
-        typedText.textContent = IP.substring(0, typeIndex - 1);
-        typeIndex--;
-        setTimeout(eraseWriter, 40);
-      } else {
-        typing = true;
-        setTimeout(typeWriter, 800);
-      }
+      if (typeIndex > 0) { typedText.textContent = IP.substring(0, --typeIndex); setTimeout(eraseWriter, 40); }
+      else setTimeout(typeWriter, 800);
     }
-
     setTimeout(typeWriter, 1400);
-
-    // ── Live server status ──
     async function fetchServerStatus() {
-      const pingBars   = document.getElementById('pingBars');
+      const pingBars = document.getElementById('pingBars');
       const playerCount = document.getElementById('playerCount');
-      const statusDot  = document.getElementById('statusDot');
-
+      const statusDot = document.getElementById('statusDot');
       try {
-        const res  = await fetch('https://api.mcsrvstat.us/3/play.commonsmc.net');
+        const res = await fetch('https://api.mcsrvstat.us/3/play.commonsmc.net');
         const data = await res.json();
-
         if (data.online) {
           const current = data.players?.online ?? 0;
-          const max     = data.players?.max ?? 0;
-
+          const max = data.players?.max ?? 0;
           playerCount.textContent = `${current}/${max}`;
-          playerCount.className   = 'mc-player-count online';
-          pingBars.className      = 'mc-ping-bars online';
-          statusDot.className     = 'mc-status-dot online';
+          playerCount.className = 'mc-player-count online';
+          pingBars.className = 'mc-ping-bars online';
+          statusDot.className = 'mc-status-dot online';
         } else {
           playerCount.textContent = 'Offline';
-          playerCount.className   = 'mc-player-count offline';
-          pingBars.className      = 'mc-ping-bars offline';
-          statusDot.className     = 'mc-status-dot offline';
+          playerCount.className = 'mc-player-count offline';
+          pingBars.className = 'mc-ping-bars offline';
+          statusDot.className = 'mc-status-dot offline';
         }
-      } catch {
-        playerCount.textContent = '...';
-      }
+      } catch { playerCount.textContent = '...'; }
     }
-
     fetchServerStatus();
     setInterval(fetchServerStatus, 60000);
   </script>
