@@ -12,7 +12,6 @@
     html { scroll-behavior: smooth; }
     body { background: var(--navy); color: var(--white); font-family: 'Crimson Pro', Georgia, serif; font-size: 18px; line-height: 1.7; overflow-x: hidden; }
     body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.5) 0%, transparent 100%), radial-gradient(1px 1px at 65% 70%, rgba(255,255,255,0.4) 0%, transparent 100%), radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.3) 0%, transparent 100%); pointer-events: none; z-index: 0; }
-
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(8,14,26,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(240,168,48,0.15); }
     .nav-logo { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; text-decoration: none; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
@@ -20,31 +19,18 @@
     .nav-links a:hover, .nav-links a.active { color: var(--gold); }
     .nav-discord { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--navy); background: var(--gold); padding: 0.5rem 1.4rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.2s; }
     .nav-discord:hover { background: var(--gold-light); transform: translateY(-1px); }
-
     .page-hero { position: relative; z-index: 1; padding: 10rem 2rem 5rem; text-align: center; }
     .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, transparent, var(--navy)); pointer-events: none; }
     .page-eyebrow { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
     .page-hero h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; color: var(--white); margin-bottom: 1rem; }
     .page-hero h1 span { color: var(--gold); }
     .page-hero p { font-size: 1.2rem; color: var(--grey); font-style: italic; max-width: 600px; margin: 0 auto; }
-
     section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
     .section-label { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
     .section-title { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
     .section-divider { width: 60px; height: 2px; background: var(--gold); margin-bottom: 2.5rem; opacity: 0.7; }
-
-    /* STAFF GRID */
     .staff-grid { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
-    .staff-card {
-      background: var(--navy-card);
-      border: 1px solid var(--navy-border);
-      border-radius: 10px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      width: 220px;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-      position: relative;
-    }
+    .staff-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 10px; padding: 2.5rem 2rem; text-align: center; width: 220px; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; position: relative; }
     .staff-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 10px 10px 0 0; opacity: 0; transition: opacity 0.2s; }
     .staff-card:hover { border-color: rgba(240,168,48,0.4); transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
     .staff-card:hover::before { opacity: 1; }
@@ -52,7 +38,6 @@
     .staff-card.admin::before { background: #e05555; }
     .staff-card.mod::before { background: #5b9bd5; }
     .staff-card.helper::before { background: #55aa55; }
-
     .staff-head { width: 72px; height: 72px; border-radius: 6px; margin: 0 auto 1rem; border: 2px solid var(--navy-border); display: block; image-rendering: pixelated; }
     .staff-name { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
     .staff-role { font-size: 0.75rem; font-family: 'Cinzel', serif; letter-spacing: 0.1em; margin-bottom: 0.8rem; }
@@ -61,15 +46,11 @@
     .role-mod { color: #7ab0d5; }
     .role-helper { color: #7aba7a; }
     .staff-quote { font-size: 0.85rem; color: var(--grey); font-style: italic; line-height: 1.5; }
-
-    /* RANK HIERARCHY */
     .rank-table { width: 100%; border-collapse: collapse; }
     .rank-table th { font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--navy-border); }
     .rank-table td { padding: 0.8rem 1rem; font-size: 0.9rem; color: var(--grey); border-bottom: 1px solid rgba(26,45,74,0.5); }
     .rank-table tr:hover td { background: rgba(255,255,255,0.02); }
     .rank-name { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.85rem; }
-
-    /* HALL OF FAME */
     .hof-section { background: linear-gradient(135deg, var(--navy-card) 0%, rgba(240,168,48,0.05) 100%); border: 1px solid rgba(240,168,48,0.15); border-radius: 12px; padding: 3rem; }
     .hof-section h3 { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
     .hof-section h3 span { color: var(--gold); }
@@ -80,24 +61,19 @@
     .hof-cat-name { font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
     .hof-cat-desc { font-size: 0.82rem; color: var(--grey); line-height: 1.5; }
     .hof-empty { font-size: 0.8rem; color: #444; font-style: italic; margin-top: 0.5rem; }
-
-    /* JOIN STAFF */
     .join-section { text-align: center; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 12px; padding: 3.5rem; }
     .join-section h3 { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 1rem; }
     .join-section p { color: var(--grey); max-width: 500px; margin: 0 auto 2rem; }
     .btn-secondary { font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); background: transparent; padding: 0.9rem 2.5rem; border-radius: 3px; text-decoration: none; border: 1px solid rgba(240,168,48,0.4); display: inline-block; transition: border-color 0.2s, background 0.2s, transform 0.15s; }
     .btn-secondary:hover { border-color: var(--gold); background: rgba(240,168,48,0.08); transform: translateY(-2px); }
-
     .sep { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--navy-border), transparent); margin: 0 auto; max-width: 1100px; }
-
     footer { position: relative; z-index: 1; border-top: 1px solid var(--navy-border); padding: 3rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-logo { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; }
     .footer-info { font-size: 0.85rem; color: var(--grey); text-align: center; }
     .footer-info span { color: var(--white); }
-    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
     .footer-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--gold); }
-
     @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .hof-categories { grid-template-columns: 1fr; } footer { flex-direction: column; text-align: center; } }
   </style>
 </head>
@@ -108,19 +84,18 @@
       <li><a href="/survival/">Survival</a></li>
       <li><a href="/skyblock/">Skyblock</a></li>
       <li><a href="/citadel/">Citadel</a></li>
+      <li><a href="/wild/">Wild</a></li>
+      <li><a href="/economy/">Economy</a></li>
       <li><a href="/roadmap/">Roadmap</a></li>
       <li><a href="/staff/" class="active">Staff</a></li>
     </ul>
     <a href="https://discord.gg/xVwzz6EAhb" target="_blank" class="nav-discord">Join Discord</a>
   </nav>
-
   <div class="page-hero">
     <p class="page-eyebrow">The Team</p>
     <h1>Staff &amp; <span>Community</span></h1>
     <p>The people who keep CommonsMC running, growing, and thriving.</p>
   </div>
-
-  <!-- STAFF -->
   <section>
     <p class="section-label">The Team</p>
     <h2 class="section-title">Meet the staff.</h2>
@@ -132,11 +107,8 @@
         <div class="staff-role role-owner">👑 Owner</div>
         <div class="staff-quote">"Founder of CommonsMC, building a community worth calling home."</div>
       </div>
-      <!-- Add more staff cards here as team grows -->
     </div>
   </section>
-
-  <!-- RANK HIERARCHY -->
   <div class="sep"></div>
   <section>
     <p class="section-label">Rank Structure</p>
@@ -144,12 +116,7 @@
     <div class="section-divider"></div>
     <table class="rank-table">
       <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Type</th>
-          <th>How to Get It</th>
-          <th>Key Permissions</th>
-        </tr>
+        <tr><th>Rank</th><th>Type</th><th>How to Get It</th><th>Key Permissions</th></tr>
       </thead>
       <tbody>
         <tr><td><span class="rank-name" style="color:var(--gold);">👑 Owner</span></td><td>Staff</td><td>Server founder</td><td>All permissions, server management</td></tr>
@@ -163,37 +130,18 @@
       </tbody>
     </table>
   </section>
-
-  <!-- HALL OF FAME -->
   <div class="sep"></div>
   <section>
     <div class="hof-section">
       <h3>🏆 Hall of <span>Fame</span></h3>
       <p>Recognising the players who shaped CommonsMC. From the founding members who were there from the beginning, to the contributors who keep the server alive, to the legends who achieved the impossible — this is their wall.</p>
       <div class="hof-categories">
-        <div class="hof-cat">
-          <span class="hof-cat-icon">🌱</span>
-          <div class="hof-cat-name">Legacy Players</div>
-          <div class="hof-cat-desc">The founding community. Players who were there from the very beginning.</div>
-          <div class="hof-empty">Entries coming soon</div>
-        </div>
-        <div class="hof-cat">
-          <span class="hof-cat-icon">💛</span>
-          <div class="hof-cat-name">Contributors</div>
-          <div class="hof-cat-desc">Players who supported CommonsMC and helped keep the lights on.</div>
-          <div class="hof-empty">Entries coming soon</div>
-        </div>
-        <div class="hof-cat">
-          <span class="hof-cat-icon">💀</span>
-          <div class="hof-cat-name">One Life Legends</div>
-          <div class="hof-cat-desc">Players who survived the longest on Skyblock One Life before meeting their end.</div>
-          <div class="hof-empty">Opens with Skyblock launch</div>
-        </div>
+        <div class="hof-cat"><span class="hof-cat-icon">🌱</span><div class="hof-cat-name">Legacy Players</div><div class="hof-cat-desc">The founding community. Players who were there from the very beginning.</div><div class="hof-empty">Entries coming soon</div></div>
+        <div class="hof-cat"><span class="hof-cat-icon">💛</span><div class="hof-cat-name">Contributors</div><div class="hof-cat-desc">Players who supported CommonsMC and helped keep the lights on.</div><div class="hof-empty">Entries coming soon</div></div>
+        <div class="hof-cat"><span class="hof-cat-icon">💀</span><div class="hof-cat-name">One Life Legends</div><div class="hof-cat-desc">Players who survived the longest on Skyblock One Life before meeting their end.</div><div class="hof-empty">Opens with Skyblock launch</div></div>
       </div>
     </div>
   </section>
-
-  <!-- JOIN STAFF -->
   <div class="sep"></div>
   <section>
     <div class="join-section">
@@ -202,13 +150,13 @@
       <a href="https://discord.gg/xVwzz6EAhb" target="_blank" class="btn-secondary">Join the Discord</a>
     </div>
   </section>
-
   <footer>
     <div class="footer-logo">COMMONS MC</div>
     <div class="footer-info"><span>play.commonsmc.net</span> · <span>commonsmc.net</span><br/><span style="font-size:0.75rem; color:#444;">© 2026 CommonsMC. A forever world.</span></div>
     <div class="footer-links">
       <a href="/">Home</a><a href="/survival/">Survival</a><a href="/skyblock/">Skyblock</a>
-      <a href="/citadel/">Citadel</a><a href="/roadmap/">Roadmap</a>
+      <a href="/citadel/">Citadel</a><a href="/wild/">Wild</a><a href="/economy/">Economy</a>
+      <a href="/roadmap/">Roadmap</a><a href="/staff/">Staff</a>
       <a href="https://discord.gg/xVwzz6EAhb" target="_blank">Discord</a>
     </div>
   </footer>
