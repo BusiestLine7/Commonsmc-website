@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Economy — CommonsMC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #080e1a; --navy-mid: #0d1829; --navy-card: #111e33; --navy-border: #1a2d4a;
+      --gold: #f0a830; --gold-light: #ffe082; --gold-dim: #c97d10;
+      --white: #f0ede8; --grey: #8a9ab5;
+      --green: #55aa55; --blue: #5b9bd5; --red: #e05555; --pink: #eb459e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--white); font-family: 'Crimson Pro', Georgia, serif; font-size: 18px; line-height: 1.7; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 40% 10%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 35%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,0.4) 0%, transparent 100%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(8,14,26,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(240,168,48,0.15); }
+    .nav-logo { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-discord { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--navy); background: var(--gold); padding: 0.5rem 1.4rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+    .nav-discord:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ── PAGE HERO ── */
+    .page-hero { position: relative; z-index: 1; padding: 10rem 2rem 5rem; text-align: center; background: linear-gradient(180deg, rgba(240,168,48,0.06) 0%, transparent 100%); }
+    .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, transparent, var(--navy)); pointer-events: none; }
+    .page-eyebrow { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .page-hero h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; color: var(--white); margin-bottom: 1rem; }
+    .page-hero h1 span { color: var(--gold); }
+    .page-hero p { font-size: 1.2rem; color: var(--grey); font-style: italic; max-width: 650px; margin: 0 auto 2rem; line-height: 1.8; }
+    .hero-badges { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+    .badge { font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; padding: 0.35rem 0.9rem; border-radius: 2px; text-transform: uppercase; }
+    .badge-survival { background: rgba(85,170,85,0.15); color: var(--green); border: 1px solid rgba(85,170,85,0.3); }
+    .badge-skyblock { background: rgba(91,155,213,0.15); color: var(--blue); border: 1px solid rgba(91,155,213,0.3); }
+    .badge-citadel { background: rgba(224,85,85,0.15); color: var(--red); border: 1px solid rgba(224,85,85,0.3); }
+
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-label { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
+    .section-divider { width: 60px; height: 2px; background: var(--gold); margin-bottom: 2.5rem; opacity: 0.7; }
+    .sep { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--navy-border), transparent); margin: 0 auto; max-width: 1100px; }
+
+    /* ── OVERVIEW CARDS ── */
+    .overview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .overview-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 10px; padding: 2rem 1.5rem; text-align: center; transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden; }
+    .overview-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .overview-card.survival::before { background: var(--green); }
+    .overview-card.skyblock::before { background: var(--blue); }
+    .overview-card.citadel::before { background: var(--red); }
+    .overview-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
+    .overview-card.survival:hover { border-color: rgba(85,170,85,0.4); }
+    .overview-card.skyblock:hover { border-color: rgba(91,155,213,0.4); }
+    .overview-card.citadel:hover { border-color: rgba(224,85,85,0.4); }
+    .overview-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+    .overview-name { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .overview-desc { font-size: 0.9rem; color: var(--grey); line-height: 1.6; margin-bottom: 1rem; }
+    .overview-currency { font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; color: var(--gold); }
+
+    /* ── HOW IT WORKS ── */
+    .steps-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+    .step-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; padding: 2rem 2.5rem; display: flex; align-items: flex-start; gap: 2rem; transition: border-color 0.2s; }
+    .step-card:hover { border-color: rgba(240,168,48,0.3); }
+    .step-num { font-family: 'Cinzel', serif; font-size: 2.5rem; font-weight: 900; color: rgba(240,168,48,0.3); line-height: 1; flex-shrink: 0; min-width: 50px; }
+    .step-content h3 { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+    .step-content p { font-size: 0.95rem; color: var(--grey); line-height: 1.7; }
+
+    /* ── QUICK SELL ── */
+    .sell-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .sell-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; padding: 2rem; transition: border-color 0.2s, transform 0.2s; }
+    .sell-card:hover { border-color: rgba(240,168,48,0.3); transform: translateY(-3px); }
+    .sell-card h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.8rem; letter-spacing: 0.05em; }
+    .sell-card p { font-size: 0.9rem; color: var(--grey); line-height: 1.6; margin-bottom: 0.8rem; }
+    .cmd-block { background: rgba(0,0,0,0.4); border: 1px solid var(--navy-border); border-radius: 4px; padding: 0.8rem 1rem; font-family: 'Courier New', monospace; font-size: 0.82rem; color: var(--gold); margin-bottom: 0.5rem; }
+    .cmd-desc { font-size: 0.82rem; color: var(--grey); font-style: italic; }
+
+    /* ── SHOP SETUP ── */
+    .shop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .shop-steps { display: flex; flex-direction: column; gap: 1rem; }
+    .shop-step { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.5rem; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 6px; transition: border-color 0.2s; }
+    .shop-step:hover { border-color: rgba(240,168,48,0.2); }
+    .shop-step-num { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 900; color: var(--gold); flex-shrink: 0; min-width: 28px; }
+    .shop-step-text { font-size: 0.92rem; color: var(--grey); line-height: 1.6; }
+    .shop-step-text strong { color: var(--white); }
+
+    /* QUICKSHOP VISUAL DEMO */
+    .qs-demo { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 10px; padding: 2rem; }
+    .qs-demo h3 { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 700; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 1.5rem; text-transform: uppercase; }
+    .qs-chest { background: #2a1a0a; border: 3px solid #8B5E3C; border-radius: 4px; padding: 1rem; margin-bottom: 1rem; position: relative; }
+    .qs-chest::before { content: '📦'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); font-size: 1.5rem; }
+    .qs-chest-inner { background: #1a0e05; border: 1px solid #5a3a1a; border-radius: 2px; padding: 0.8rem 1rem; font-family: 'Courier New', monospace; font-size: 0.78rem; margin-top: 0.5rem; }
+    .qs-line { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem; color: #aaa; }
+    .qs-line .label { color: #888; }
+    .qs-line .value { color: var(--gold); font-weight: 700; }
+    .qs-line .value.green { color: var(--green); }
+    .qs-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+    .qs-btn { flex: 1; padding: 0.4rem; text-align: center; border-radius: 3px; font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .qs-btn.buy { background: rgba(85,170,85,0.2); color: var(--green); border: 1px solid rgba(85,170,85,0.4); }
+    .qs-btn.sell { background: rgba(240,168,48,0.15); color: var(--gold); border: 1px solid rgba(240,168,48,0.3); }
+    .qs-note { font-size: 0.82rem; color: var(--grey); font-style: italic; margin-top: 1rem; line-height: 1.6; }
+
+    /* ── MARKET SECTION ── */
+    .market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .market-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 10px; padding: 2rem; }
+    .market-card h3 { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .market-card .market-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .market-card p { font-size: 0.92rem; color: var(--grey); line-height: 1.7; margin-bottom: 0.8rem; }
+    .market-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .market-card ul li { font-size: 0.88rem; color: var(--grey); display: flex; align-items: flex-start; gap: 0.5rem; }
+    .market-card ul li::before { content: '◇'; color: var(--gold); font-size: 0.7rem; flex-shrink: 0; margin-top: 0.2rem; }
+
+    /* ── MARKET RULES ── */
+    .rules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .rule-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; padding: 1.8rem 1.5rem; text-align: center; transition: border-color 0.2s, transform 0.2s; }
+    .rule-card:hover { border-color: rgba(240,168,48,0.3); transform: translateY(-3px); }
+    .rule-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+    .rule-title { font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; letter-spacing: 0.05em; }
+    .rule-desc { font-size: 0.85rem; color: var(--grey); line-height: 1.5; }
+
+    /* ── PRICE TABLE ── */
+    .price-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .price-tab { font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; padding: 0.45rem 1.1rem; border-radius: 3px; cursor: pointer; text-transform: uppercase; border: 1px solid var(--navy-border); color: var(--grey); background: var(--navy-card); transition: all 0.2s; }
+    .price-tab:hover { border-color: rgba(240,168,48,0.3); color: var(--white); }
+    .price-tab.active { background: rgba(240,168,48,0.15); border-color: rgba(240,168,48,0.4); color: var(--gold); }
+    .price-section { display: none; }
+    .price-section.active { display: block; }
+    .price-table { width: 100%; border-collapse: collapse; }
+    .price-table th { font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); padding: 0.7rem 1rem; text-align: left; border-bottom: 1px solid var(--navy-border); }
+    .price-table td { padding: 0.6rem 1rem; font-size: 0.88rem; color: var(--grey); border-bottom: 1px solid rgba(26,45,74,0.4); font-family: 'Courier New', monospace; }
+    .price-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .price-table td:first-child { color: var(--white); font-family: 'Crimson Pro', serif; font-size: 0.95rem; }
+    .price-value { color: var(--gold) !important; font-weight: 700; }
+    .price-note { font-size: 0.8rem; color: var(--grey); font-style: italic; margin-top: 1rem; }
+
+    /* ── COMMANDS ── */
+    .commands-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .command-group h3 { font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 700; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 1rem; text-transform: uppercase; }
+    .command-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .command-list li { display: flex; align-items: flex-start; gap: 0.8rem; font-size: 0.9rem; color: var(--grey); }
+    .cmd { font-family: 'Courier New', monospace; font-size: 0.78rem; color: var(--gold); background: rgba(240,168,48,0.08); border: 1px solid rgba(240,168,48,0.2); padding: 0.1rem 0.5rem; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
+
+    /* ── BUTTONS ── */
+    .btn-secondary { font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); background: transparent; padding: 0.9rem 2.5rem; border-radius: 3px; text-decoration: none; border: 1px solid rgba(240,168,48,0.4); display: inline-block; transition: border-color 0.2s, background 0.2s, transform 0.15s; }
+    .btn-secondary:hover { border-color: var(--gold); background: rgba(240,168,48,0.08); transform: translateY(-2px); }
+
+    /* ── INFO BOX ── */
+    .info-box { background: rgba(240,168,48,0.06); border: 1px solid rgba(240,168,48,0.2); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 2rem; }
+    .info-box p { font-size: 0.95rem; color: var(--grey); line-height: 1.7; }
+    .info-box p strong { color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--navy-border); padding: 3rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; }
+    .footer-info { font-size: 0.85rem; color: var(--grey); text-align: center; }
+    .footer-info span { color: var(--white); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── ADMIN SHOP INTERACTIVE ── */
+    .shop-global-search { margin-bottom: 1.8rem; position: relative; }
+    .shop-global-search input { width: 100%; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 6px; padding: 0.75rem 1rem 0.75rem 2.8rem; font-family: 'Crimson Pro', serif; font-size: 1rem; color: var(--white); outline: none; transition: border-color 0.2s; }
+    .shop-global-search input:focus { border-color: rgba(240,168,48,0.5); }
+    .shop-global-search input::placeholder { color: var(--grey); font-style: italic; }
+    .shop-global-search::before { content: '🔍'; position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); font-size: 0.9rem; pointer-events: none; z-index: 1; }
+    .global-search-results { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; margin-top: 0.5rem; overflow: hidden; display: none; }
+    .global-search-results.visible { display: block; }
+    .gsr-header { font-family: 'Cinzel', serif; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); padding: 0.7rem 1.2rem; border-bottom: 1px solid var(--navy-border); }
+    .gsr-row { display: grid; grid-template-columns: 2rem 1fr auto auto 5rem; align-items: center; gap: 0.6rem; padding: 0.45rem 1.2rem; border-bottom: 1px solid rgba(26,45,74,0.3); transition: background 0.12s; cursor: default; }
+    .gsr-row:last-child { border-bottom: none; }
+    .gsr-row:hover { background: rgba(240,168,48,0.04); }
+    .gsr-icon { width: 20px; height: 20px; image-rendering: pixelated; image-rendering: crisp-edges; }
+    .gsr-name { font-size: 0.9rem; color: var(--white); }
+    .gsr-cat { font-family: 'Cinzel', serif; font-size: 0.6rem; color: var(--grey); letter-spacing: 0.05em; text-align: right; }
+    .gsr-sell { font-family: 'Courier New', monospace; font-size: 0.78rem; color: var(--gold); font-weight: 700; text-align: right; }
+    .gsr-buy  { font-family: 'Courier New', monospace; font-size: 0.78rem; color: var(--green); font-weight: 700; text-align: right; }
+    .gsr-none { padding: 1.2rem; text-align: center; color: var(--grey); font-style: italic; font-size: 0.9rem; }
+
+    .shop-cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 1rem; }
+    .shop-cat-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; padding: 1.3rem 1rem; text-align: center; cursor: pointer; transition: border-color 0.2s, transform 0.18s, background 0.2s; }
+    .shop-cat-card:hover { border-color: rgba(240,168,48,0.55); transform: translateY(-4px); background: rgba(240,168,48,0.04); }
+    .shop-cat-card .cat-emoji { font-size: 1.9rem; margin-bottom: 0.5rem; display: block; }
+    .shop-cat-card .cat-name { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 700; color: var(--white); letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+    .shop-cat-card .cat-count { font-size: 0.78rem; color: var(--grey); }
+    .shop-cat-card .cat-dyn { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.08em; color: var(--blue); margin-top: 0.3rem; }
+
+    /* ── MODAL ── */
+    .shop-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(4,8,18,0.88); z-index: 600; align-items: center; justify-content: center; padding: 1.5rem; backdrop-filter: blur(4px); }
+    .shop-modal-overlay.open { display: flex; }
+    .shop-modal { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 12px; width: 100%; max-width: 740px; max-height: 88vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.7); }
+    .shop-modal-top { display: flex; align-items: center; gap: 1rem; padding: 1.4rem 1.8rem; border-bottom: 1px solid var(--navy-border); flex-shrink: 0; }
+    .modal-emoji { font-size: 2rem; flex-shrink: 0; }
+    .modal-title { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); flex: 1; }
+    .modal-count { font-family: 'Cinzel', serif; font-size: 0.65rem; color: var(--grey); letter-spacing: 0.1em; }
+    .modal-close { background: none; border: 1px solid transparent; color: var(--grey); font-size: 1.1rem; line-height: 1; cursor: pointer; padding: 0.35rem 0.6rem; border-radius: 4px; transition: color 0.15s, border-color 0.15s; }
+    .modal-close:hover { color: var(--white); border-color: var(--navy-border); }
+    .modal-search-wrap { padding: 0.9rem 1.8rem; border-bottom: 1px solid var(--navy-border); flex-shrink: 0; }
+    .modal-search-wrap input { width: 100%; background: rgba(0,0,0,0.35); border: 1px solid var(--navy-border); border-radius: 5px; padding: 0.55rem 1rem; font-family: 'Crimson Pro', serif; font-size: 0.95rem; color: var(--white); outline: none; transition: border-color 0.2s; }
+    .modal-search-wrap input:focus { border-color: rgba(240,168,48,0.4); }
+    .modal-search-wrap input::placeholder { color: var(--grey); font-style: italic; }
+    .modal-legend { display: flex; gap: 1.2rem; padding: 0.6rem 1.8rem; border-bottom: 1px solid var(--navy-border); flex-shrink: 0; flex-wrap: wrap; }
+    .legend-item { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.08em; display: flex; align-items: center; gap: 0.3rem; }
+    .legend-sell { color: var(--gold); }
+    .legend-buy  { color: var(--green); }
+    .legend-dyn  { color: var(--blue); }
+    .legend-lock { color: #eb459e; }
+    .modal-body { overflow-y: auto; flex: 1; }
+    .modal-body::-webkit-scrollbar { width: 5px; }
+    .modal-body::-webkit-scrollbar-thumb { background: var(--navy-border); border-radius: 3px; }
+
+    .items-table { width: 100%; border-collapse: collapse; }
+    .items-table th { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); padding: 0.65rem 1rem; text-align: left; border-bottom: 1px solid var(--navy-border); position: sticky; top: 0; background: var(--navy-card); z-index: 2; }
+    .items-table th.r { text-align: right; }
+    .items-table td { padding: 0.45rem 1rem; border-bottom: 1px solid rgba(26,45,74,0.28); font-size: 0.87rem; color: var(--grey); vertical-align: middle; }
+    .items-table td.r { text-align: right; font-family: 'Courier New', monospace; font-size: 0.8rem; }
+    .items-table tr:last-child td { border-bottom: none; }
+    .items-table tr:hover td { background: rgba(255,255,255,0.018); }
+    .item-cell { display: flex; align-items: center; gap: 0.65rem; }
+    .mc-icon { width: 24px; height: 24px; image-rendering: pixelated; image-rendering: crisp-edges; flex-shrink: 0; opacity: 1; transition: opacity 0.2s; }
+    .mc-icon.err { opacity: 0.25; filter: grayscale(1); }
+    .item-label { color: var(--white); font-size: 0.88rem; }
+    td.sell-val { color: var(--gold) !important; font-weight: 700; }
+    td.sell-none { color: #3a4e6a !important; }
+    td.buy-val { color: var(--green) !important; font-weight: 700; }
+    .tag { display: inline-block; font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.07em; padding: 0.1rem 0.32rem; border-radius: 2px; vertical-align: middle; margin-left: 0.2rem; }
+    .tag-dyn  { background: rgba(91,155,213,0.13); color: var(--blue);  border: 1px solid rgba(91,155,213,0.3); }
+    .tag-lock { background: rgba(235,69,158,0.12); color: #eb459e; border: 1px solid rgba(235,69,158,0.28); }
+    .no-results { padding: 2.5rem 1rem; text-align: center; color: var(--grey); font-style: italic; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
+      .overview-grid { grid-template-columns: 1fr; }
+      .sell-grid { grid-template-columns: 1fr; }
+      .shop-grid { grid-template-columns: 1fr; }
+      .market-grid { grid-template-columns: 1fr; }
+      .rules-grid { grid-template-columns: 1fr; }
+      .commands-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">COMMONS MC</a>
+    <ul class="nav-links">
+      <li><a href="/survival/">Survival</a></li>
+      <li><a href="/skyblock/">Skyblock</a></li>
+      <li><a href="/citadel/">Citadel</a></li>
+      <li><a href="/economy/" class="active">Economy</a></li>
+      <li><a href="/wild/">Wild</a></li>
+      <li><a href="/roadmap/">Roadmap</a></li>
+      <li><a href="/staff/">Staff</a></li>
+    </ul>
+    <a href="https://discord.gg/xVwzz6EAhb" target="_blank" class="nav-discord">Join Discord</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <p class="page-eyebrow">CommonsMC Network</p>
+    <h1>The <span>Economy</span></h1>
+    <p>A unified player-driven economy across all CommonsMC servers. Buy, sell, trade, and build your empire — the market is yours to shape.</p>
+    <div class="hero-badges">
+      <span class="badge badge-survival">🌿 Commons Survival</span>
+      <span class="badge badge-skyblock">☁️ Skyblock</span>
+      <span class="badge badge-citadel">⚔️ Citadel Factions</span>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section>
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title">One system. Three worlds.</h2>
+    <div class="section-divider"></div>
+    <div class="info-box">
+      <p>The CommonsMC economy is <strong>entirely player-driven</strong>. The server sets a baseline floor price for every item — but the real market is shaped by you. Supply and demand dictate true value. Rare items are worth what players will pay for them. There's always a minimum price, but the community drives everything above it.</p>
+    </div>
+    <div class="overview-grid">
+      <div class="overview-card survival">
+        <span class="overview-icon">🌿</span>
+        <div class="overview-name">Commons Survival</div>
+        <div class="overview-desc">Full player economy with chest shops, a central market hub at spawn, and server floor prices via /sell. Build your empire across the forever world.</div>
+        <div class="overview-currency">💰 Coins — Separate Economy</div>
+      </div>
+      <div class="overview-card skyblock">
+        <span class="overview-icon">☁️</span>
+        <div class="overview-name">Skyblock</div>
+        <div class="overview-desc">Island-based economy shared across Skyblock Economy, One Life, and Co-op modes. Trade island resources, compete for richest island rankings.</div>
+        <div class="overview-currency">💰 Coins — Skyblock Economy</div>
+      </div>
+      <div class="overview-card citadel">
+        <span class="overview-icon">⚔️</span>
+        <div class="overview-name">Citadel Factions</div>
+        <div class="overview-desc">Faction-based economy. Trade resources, build faction wealth, and control the market to gain a strategic edge over rival factions.</div>
+        <div class="overview-currency">💰 Coins — Citadel Economy</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <div class="sep"></div>
+  <section>
+    <p class="section-label">Getting Started</p>
+    <h2 class="section-title">Your first coins.</h2>
+    <div class="section-divider"></div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Start with 500 Coins</h3>
+          <p>Every new player starts with <strong>500 coins</strong> in their balance. Use this to buy starter supplies from other players or the market while you get established. Check your balance anytime with <code style="color:var(--gold); background:rgba(240,168,48,0.1); padding:0.1rem 0.4rem; border-radius:3px;">/balance</code>.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Sell Items to the Server</h3>
+          <p>The fastest way to earn coins is selling items directly to the server at floor prices. Hold an item and type <code style="color:var(--gold); background:rgba(240,168,48,0.1); padding:0.1rem 0.4rem; border-radius:3px;">/sell hand</code>, or sell your entire inventory with <code style="color:var(--gold); background:rgba(240,168,48,0.1); padding:0.1rem 0.4rem; border-radius:3px;">/sell all</code>. Prefer a GUI? Use <code style="color:var(--gold); background:rgba(240,168,48,0.1); padding:0.1rem 0.4rem; border-radius:3px;">/shop</code> to browse by category. Floor prices are the guaranteed minimum — player shops often pay more.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Buy & Sell at Player Shops</h3>
+          <p>Player shops offer better prices than the server floor. Visit the <strong>Market Hub</strong> at spawn to browse player-run shops. Right-click a shop chest to buy, left-click to sell. Prices are set by players — the market decides real value.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Open Your Own Shop</h3>
+          <p>Set up a shop anywhere — at your base, in the market hub, or anywhere in the world. Place a chest, left-click it with the item you want to sell, type your price in chat, and your shop is live instantly. No complicated sign formatting needed.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <h3>Trade with Players Directly</h3>
+          <p>Prefer direct deals? Use <code style="color:var(--gold); background:rgba(240,168,48,0.1); padding:0.1rem 0.4rem; border-radius:3px;">/pay &lt;player&gt; &lt;amount&gt;</code> to send coins to any player. Great for private trades, commissions, or tipping a builder for their work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK SELL -->
+  <div class="sep"></div>
+  <section>
+    <p class="section-label">Server Floor Prices</p>
+    <h2 class="section-title">Quick selling.</h2>
+    <div class="section-divider"></div>
+    <div class="info-box">
+      <p>Floor prices are the <strong>minimum guaranteed value</strong> for every item. The server will always buy at these prices — but remember, player shops often offer significantly more. Use <strong>/sell</strong> as a safety net, not your primary income strategy.</p>
+    </div>
+    <div class="sell-grid">
+      <div class="sell-card">
+        <h3>💰 Sell What You're Holding</h3>
+        <p>Hold the item in your hand and run:</p>
+        <div class="cmd-block">/sell hand</div>
+        <div class="cmd-block">/sell hand [amount]</div>
+        <p class="cmd-desc">Sells the item in your main hand. Add an amount to sell a specific quantity.</p>
+      </div>
+      <div class="sell-card">
+        <h3>🎒 Sell Your Whole Inventory</h3>
+        <p>Dump your whole inventory at once:</p>
+        <div class="cmd-block">/sell all</div>
+        <div class="cmd-block">/sell inventory</div>
+        <p class="cmd-desc">Sells every sellable item in your inventory at floor prices. Great after a mining session.</p>
+      </div>
+      <div class="sell-card">
+        <h3>🔍 Check Item Value</h3>
+        <p>Not sure what something is worth?</p>
+        <div class="cmd-block">/worth</div>
+        <div class="cmd-block">/worth [item name]</div>
+        <p class="cmd-desc">Shows the server floor price for the item in your hand or by name.</p>
+      </div>
+      <div class="sell-card">
+        <h3>💵 Check Your Balance</h3>
+        <p>See how many coins you have:</p>
+        <div class="cmd-block">/balance</div>
+        <div class="cmd-block">/bal [player]</div>
+        <p class="cmd-desc">Check your own balance or look up another player's balance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMIN SHOP -->
+  <div class="sep"></div>
+  <section>
+    <p class="section-label">Server Shop</p>
+    <h2 class="section-title">The admin shop.</h2>
+    <div class="section-divider"></div>
+    <div class="info-box">
+      <p>The server runs a full GUI shop accessible with <strong>/shop</strong>. Browse 13 categories, sell items at floor prices, or buy anything the player market doesn't have. Admin shop buy prices are <strong>2.5× the floor</strong> by design — player shops will almost always beat them. Use <code style="color:var(--gold); background:rgba(240,168,48,0.1); padding:0.1rem 0.4rem; border-radius:3px;">/shop</code> as your fallback, not your first stop.</p>
+    </div>
+
+    <div class="shop-global-search">
+      <input type="text" id="globalSearch" placeholder="Search all 210 items across every category…" autocomplete="off" />
+      <div class="global-search-results" id="globalResults"></div>
+    </div>
+
+    <div class="shop-cat-grid" id="catGrid">
+      <!-- populated by JS -->
+    </div>
+
+    <div style="margin-top:1.5rem; display:flex; gap:2rem; flex-wrap:wrap;">
+      <div style="font-size:0.85rem; color:var(--grey);">⚡ <strong style="color:var(--blue)">Dynamic pricing</strong> active on Farming &amp; some categories — prices shift with server supply &amp; demand.</div>
+      <div style="font-size:0.85rem; color:var(--grey);">🔒 <strong style="color:#eb459e">Buy-only</strong> items (enchanted books, beacons, spawners) cannot be sold back to the server.</div>
+    </div>
+  </section>
+
+  <!-- SHOP MODAL -->
+  <div class="shop-modal-overlay" id="shopModal">
+    <div class="shop-modal">
+      <div class="shop-modal-top">
+        <span class="modal-emoji" id="modalEmoji"></span>
+        <span class="modal-title" id="modalTitle"></span>
+        <span class="modal-count" id="modalCount"></span>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+      <div class="modal-search-wrap">
+        <input type="text" id="modalSearch" placeholder="Filter items…" autocomplete="off" />
+      </div>
+      <div class="modal-legend">
+        <span class="legend-item legend-sell">🟡 Sell = server pays you</span>
+        <span class="legend-item legend-buy">🟢 Buy = you pay server</span>
+        <span class="legend-item legend-dyn">⚡ Dynamic = price fluctuates</span>
+        <span class="legend-item legend-lock">🔒 Buy-only = no sell</span>
+      </div>
+      <div class="modal-body">
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th style="width:40%">Item</th>
+              <th class="r" style="width:10%">Qty</th>
+              <th class="r" style="width:20%">Sell</th>
+              <th class="r" style="width:20%">Buy</th>
+              <th class="r" style="width:10%">Tags</th>
+            </tr>
+          </thead>
+          <tbody id="modalItems"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOOR PRICES -->
+  <div class="sep"></div>
+  <section>
+    <p class="section-label">Price Reference</p>
+    <h2 class="section-title">Server floor prices.</h2>
+    <div class="section-divider"></div>
+    <div class="info-box">
+      <p>These are <strong>floor prices</strong> — the minimum the server will pay. Player shops set their own prices above the floor. Rare items especially will be worth far more on the open market.</p>
+    </div>
+
+    <div class="price-tabs">
+      <div class="price-tab active" onclick="showPriceTab('ores')">⛏️ Ores & Metals</div>
+      <div class="price-tab" onclick="showPriceTab('farming')">🌾 Farming</div>
+      <div class="price-tab" onclick="showPriceTab('mobs')">⚔️ Mob Drops</div>
+      <div class="price-tab" onclick="showPriceTab('rare')">💎 Rare Items</div>
+    </div>
+
+    <div class="price-section active" id="price-ores">
+      <table class="price-table">
+        <thead><tr><th>Item</th><th>Floor Price (each)</th></tr></thead>
+        <tbody>
+          <tr><td>Coal</td><td class="price-value">3 coins</td></tr>
+          <tr><td>Raw Iron</td><td class="price-value">6 coins</td></tr>
+          <tr><td>Iron Ingot</td><td class="price-value">8 coins</td></tr>
+          <tr><td>Iron Block</td><td class="price-value">70 coins</td></tr>
+          <tr><td>Raw Copper</td><td class="price-value">4 coins</td></tr>
+          <tr><td>Copper Ingot</td><td class="price-value">5 coins</td></tr>
+          <tr><td>Raw Gold</td><td class="price-value">12 coins</td></tr>
+          <tr><td>Gold Ingot</td><td class="price-value">15 coins</td></tr>
+          <tr><td>Redstone</td><td class="price-value">3 coins</td></tr>
+          <tr><td>Lapis Lazuli</td><td class="price-value">4 coins</td></tr>
+          <tr><td>Amethyst Shard</td><td class="price-value">6 coins</td></tr>
+          <tr><td>Diamond</td><td class="price-value">60 coins</td></tr>
+          <tr><td>Diamond Block</td><td class="price-value">525 coins</td></tr>
+          <tr><td>Emerald</td><td class="price-value">40 coins</td></tr>
+          <tr><td>Ancient Debris</td><td class="price-value">200 coins</td></tr>
+          <tr><td>Netherite Scrap</td><td class="price-value">80 coins</td></tr>
+          <tr><td>Netherite Ingot</td><td class="price-value">350 coins</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="price-section" id="price-farming">
+      <table class="price-table">
+        <thead><tr><th>Item</th><th>Floor Price (each)</th></tr></thead>
+        <tbody>
+          <tr><td>Wheat</td><td class="price-value">3 coins</td></tr>
+          <tr><td>Carrot</td><td class="price-value">3 coins</td></tr>
+          <tr><td>Potato</td><td class="price-value">2 coins</td></tr>
+          <tr><td>Beetroot</td><td class="price-value">3 coins</td></tr>
+          <tr><td>Pumpkin</td><td class="price-value">5 coins</td></tr>
+          <tr><td>Melon</td><td class="price-value">8 coins</td></tr>
+          <tr><td>Sugar Cane</td><td class="price-value">2 coins</td></tr>
+          <tr><td>Nether Wart</td><td class="price-value">4 coins</td></tr>
+          <tr><td>Cactus</td><td class="price-value">2 coins</td></tr>
+          <tr><td>Bamboo</td><td class="price-value">1 coin</td></tr>
+          <tr><td>Cocoa Beans</td><td class="price-value">3 coins</td></tr>
+          <tr><td>Sweet Berries</td><td class="price-value">2 coins</td></tr>
+          <tr><td>Glow Berries</td><td class="price-value">3 coins</td></tr>
+          <tr><td>Honey Bottle</td><td class="price-value">8 coins</td></tr>
+          <tr><td>Honeycomb</td><td class="price-value">5 coins</td></tr>
+          <tr><td>Golden Apple</td><td class="price-value">40 coins</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="price-section" id="price-mobs">
+      <table class="price-table">
+        <thead><tr><th>Item</th><th>Floor Price (each)</th></tr></thead>
+        <tbody>
+          <tr><td>Bone</td><td class="price-value">2 coins</td></tr>
+          <tr><td>String</td><td class="price-value">2 coins</td></tr>
+          <tr><td>Gunpowder</td><td class="price-value">4 coins</td></tr>
+          <tr><td>Slime Ball</td><td class="price-value">5 coins</td></tr>
+          <tr><td>Blaze Rod</td><td class="price-value">8 coins</td></tr>
+          <tr><td>Ender Pearl</td><td class="price-value">10 coins</td></tr>
+          <tr><td>Eye of Ender</td><td class="price-value">20 coins</td></tr>
+          <tr><td>Ghast Tear</td><td class="price-value">15 coins</td></tr>
+          <tr><td>Shulker Shell</td><td class="price-value">50 coins</td></tr>
+          <tr><td>Nautilus Shell</td><td class="price-value">20 coins</td></tr>
+          <tr><td>Heart of the Sea</td><td class="price-value">150 coins</td></tr>
+          <tr><td>Leather</td><td class="price-value">4 coins</td></tr>
+          <tr><td>Phantom Membrane</td><td class="price-value">10 coins</td></tr>
+          <tr><td>Turtle Scute</td><td class="price-value">15 coins</td></tr>
+          <tr><td>Nether Star</td><td class="price-value">800 coins</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="price-section" id="price-rare">
+      <table class="price-table">
+        <thead><tr><th>Item</th><th>Floor Price (each)</th></tr></thead>
+        <tbody>
+          <tr><td>Totem of Undying</td><td class="price-value">300 coins</td></tr>
+          <tr><td>Trident</td><td class="price-value">200 coins</td></tr>
+          <tr><td>Elytra</td><td class="price-value">1,000 coins</td></tr>
+          <tr><td>Nether Star</td><td class="price-value">800 coins</td></tr>
+          <tr><td>Heart of the Sea</td><td class="price-value">150 coins</td></tr>
+          <tr><td>Shulker Shell</td><td class="price-value">50 coins</td></tr>
+          <tr><td>Dragon Breath</td><td class="price-value">25 coins</td></tr>
+          <tr><td>Dragon Egg</td><td class="price-value">5,000 coins</td></tr>
+          <tr><td>Enchanted Golden Apple</td><td class="price-value">500 coins</td></tr>
+          <tr><td>Music Disc (Pigstep)</td><td class="price-value">80 coins</td></tr>
+          <tr><td>Music Disc (Relic)</td><td class="price-value">80 coins</td></tr>
+          <tr><td>Lodestone</td><td class="price-value">30 coins</td></tr>
+          <tr><td>Recovery Compass</td><td class="price-value">40 coins</td></tr>
+          <tr><td>Mace</td><td class="price-value">180 coins</td></tr>
+        </tbody>
+      </table>
+      <p class="price-note">⚠️ Floor prices are minimums only. Rare items like Elytra and Dragon Egg will be worth significantly more on the player market.</p>
+    </div>
+  </section>
+
+  <!-- SHOP SETUP -->
+  <div class="sep"></div>
+  <section>
+    <p class="section-label">Player Shops</p>
+    <h2 class="section-title">Open your own shop.</h2>
+    <div class="section-divider"></div>
+    <div class="info-box">
+      <p>Shops can be placed <strong>anywhere in the world</strong> — at your base, in the market hub, or anywhere you can place a chest. The Market Hub at spawn is just a central guaranteed location for buyers to find goods easily.</p>
+    </div>
+    <div class="shop-grid">
+      <div class="shop-steps">
+        <div class="shop-step">
+          <div class="shop-step-num">1</div>
+          <div class="shop-step-text"><strong>Place a chest</strong> anywhere you want your shop to be. Inside the market hub or at your own base — your choice.</div>
+        </div>
+        <div class="shop-step">
+          <div class="shop-step-num">2</div>
+          <div class="shop-step-text"><strong>Hold the item</strong> you want to sell in your hand.</div>
+        </div>
+        <div class="shop-step">
+          <div class="shop-step-num">3</div>
+          <div class="shop-step-text"><strong>Left-click the chest</strong> while holding the item. A chat prompt will appear.</div>
+        </div>
+        <div class="shop-step">
+          <div class="shop-step-num">4</div>
+          <div class="shop-step-text"><strong>Type your price</strong> in chat. This is the price per item players will pay to buy from your shop.</div>
+        </div>
+        <div class="shop-step">
+          <div class="shop-step-num">5</div>
+          <div class="shop-step-text"><strong>Stock your chest</strong> with the item. Your shop is now live — players can right-click to buy!</div>
+        </div>
+        <div class="shop-step">
+          <div class="shop-step-num">6</div>
+          <div class="shop-step-text"><strong>Collect your earnings</strong> — coins are automatically added to your balance when someone buys from your shop.</div>
+        </div>
+      </div>
+      <div class="qs-demo">
+        <h3>🪧 How a Shop Looks</h3>
+        <div class="qs-chest">
+          <div class="qs-chest-inner">
+            <div class="qs-line"><span class="label">Item:</span><span class="value">Diamond</span></div>
+            <div class="qs-line"><span class="label">Price:</span><span class="value">75 coins each</span></div>
+            <div class="qs-line"><span class="label">Stock:</span><span class="value green">32 in stock</span></div>
+            <div class="qs-line"><span class="label">Owner:</span><span class="value">BusiestLine7</span></div>
+          </div>
+          <div class="qs-actions">
+            <div class="qs-btn buy">▶ Right-click to Buy</div>
+            <div class="qs-btn sell">◀ Left-click to Sell</div>
+          </div>
+        </div>
+        <p class="qs-note">💡 Want to also buy items from players? Set your shop to buy mode so players can sell to you directly. Great for collecting bulk resources without farming them yourself.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKET HUB -->
+  <div class="sep"></div>
+  <section>
+    <p class="section-label">Central Markets</p>
+    <h2 class="section-title">The Market Hub.</h2>
+    <div class="section-divider"></div>
+    <div class="market-grid">
+      <div class="market-card">
+        <span class="market-icon">🏪</span>
+        <h3>What is the Market Hub?</h3>
+        <p>Each server has a central Market Hub located at spawn — a dedicated area where players can rent a stall and set up a permanent shop in a busy, high-traffic location.</p>
+        <p>The Market Hub guarantees buyers can always find a place to shop, even if they don't know any individual player shops.</p>
+        <ul>
+          <li>Located at /warp market</li>
+          <li>High traffic — near spawn</li>
+          <li>Guaranteed stall assignment</li>
+          <li>Admin-claimed and protected</li>
+          <li>One stall per player</li>
+        </ul>
+      </div>
+      <div class="market-card">
+        <span class="market-icon">🏠</span>
+        <h3>Private Shops</h3>
+        <p>Don't want a stall? No problem. You can set up a shop anywhere in the world — at your base, inside your claim, wherever you like.</p>
+        <p>Private shops are great for selling bulk resources from your farm or base without leaving your territory.</p>
+        <ul>
+          <li>Place anywhere in the world</li>
+          <li>Inside your own claimed land</li>
+          <li>No stall limit for private shops</li>
+          <li>Set your own prices freely</li>
+          <li>Accessible by any player who visits</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKET RULES -->
+  <div class="sep"></div>
+  <section>
+    <p class="section-label">Market Rules</p>
+    <h2 class="section-title">Keep it fair.</h2>
+    <div class="section-divider"></div>
+    <div class="rules-grid">
+      <div class="rule-card">
+        <span class="rule-icon">🏪</span>
+        <div class="rule-title">One Market Stall</div>
+        <div class="rule-desc">Each player may hold one stall in the Market Hub. Private shops at your base are unlimited.</div>
+      </div>
+      <div class="rule-card">
+        <span class="rule-icon">⏰</span>
+        <div class="rule-title">Stay Active</div>
+        <div class="rule-desc">Market stalls are reassigned after 1 month of player inactivity. Keep playing to keep your spot!</div>
+      </div>
+      <div class="rule-card">
+        <span class="rule-icon">✅</span>
+        <div class="rule-title">Sell Anything</div>
+        <div class="rule-desc">No banned items. The market is open — sell whatever you can gather, craft, or trade for.</div>
+      </div>
+      <div class="rule-card">
+        <span class="rule-icon">💰</span>
+        <div class="rule-title">Set Your Own Prices</div>
+        <div class="rule-desc">Prices are entirely up to you. The server sets floor prices but you can charge whatever the market will bear.</div>
+      </div>
+      <div class="rule-card">
+        <span class="rule-icon">🤝</span>
+        <div class="rule-title">Fair Trading</div>
+        <div class="rule-desc">No scamming, misleading item descriptions, or deceptive shop signs. Keep it honest.</div>
+      </div>
+      <div class="rule-card">
+        <span class="rule-icon">📋</span>
+        <div class="rule-title">Staff Oversight</div>
+        <div class="rule-desc">Staff reserve the right to remove shops that violate server rules or abuse the economy system.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMANDS -->
+  <div class="sep"></div>
+  <section>
+    <p class="section-label">Reference</p>
+    <h2 class="section-title">Economy commands.</h2>
+    <div class="section-divider"></div>
+    <div class="commands-grid">
+      <div class="command-group">
+        <h3>💰 Coins & Selling</h3>
+        <ul class="command-list">
+          <li><span class="cmd">/balance</span> Check your coin balance</li>
+          <li><span class="cmd">/bal &lt;player&gt;</span> Check another player's balance</li>
+          <li><span class="cmd">/pay &lt;player&gt; &lt;amount&gt;</span> Send coins to a player</li>
+          <li><span class="cmd">/sell hand</span> Sell item in your hand</li>
+          <li><span class="cmd">/sell all</span> Sell entire inventory</li>
+          <li><span class="cmd">/worth</span> Check floor price of held item</li>
+        </ul>
+      </div>
+      <div class="command-group">
+        <h3>🏪 Shops & Market</h3>
+        <ul class="command-list">
+          <li><span class="cmd">/shop</span> Open the server admin shop (buy &amp; sell)</li>
+          <li><span class="cmd">/warp market</span> Teleport to the Market Hub</li>
+          <li><span class="cmd">/qs help</span> QuickShop help menu</li>
+          <li><span class="cmd">/qs find &lt;item&gt;</span> Find nearby shops selling an item</li>
+          <li><span class="cmd">/qs price &lt;amount&gt;</span> Change your shop price</li>
+          <li><span class="cmd">/qs buy</span> Toggle shop to buying mode</li>
+          <li><span class="cmd">/qs sell</span> Toggle shop to selling mode</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="sep"></div>
+  <section style="text-align:center; padding: 4rem 2rem;">
+    <p class="section-label">Ready to Trade?</p>
+    <h2 class="section-title">The market awaits.</h2>
+    <div class="section-divider" style="margin: 0 auto 2rem;"></div>
+    <p style="color:var(--grey); margin-bottom:2rem; font-size:1.05rem;">Join the server, gather resources, and start building your economic empire.</p>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <button class="btn-secondary" onclick="navigator.clipboard.writeText('play.commonsmc.net')">Copy Server IP</button>
+      <a href="https://discord.gg/xVwzz6EAhb" target="_blank" class="btn-secondary">Join Discord</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">COMMONS MC</div>
+    <div class="footer-info"><span>play.commonsmc.net</span> · Java 26.1.2 · <span>commonsmc.net</span><br/><span style="font-size:0.75rem; color:#444;">© 2026 CommonsMC. A forever world.</span></div>
+    <div class="footer-links">
+      <a href="/">Home</a><a href="/survival/">Survival</a><a href="/skyblock/">Skyblock</a>
+      <a href="/citadel/">Citadel</a><a href="/roadmap/">Roadmap</a><a href="/staff/">Staff</a>
+      <a href="https://discord.gg/xVwzz6EAhb" target="_blank">Discord</a>
+    </div>
+  </footer>
+
+  <script>
+  // ─── PRICE FORMATTER ───────────────────────────────────────────────────────
+  function fmt(n) { return n >= 1000 ? n.toLocaleString() : n; }
+
+  // ─── TEXTURE BASE ──────────────────────────────────────────────────────────
+  const TEX = 'https://cdn.jsdelivr.net/gh/InventivetalentDev/minecraft-assets@1.21.4/assets/minecraft/textures/';
+  function tex(path) { return TEX + path + '.png'; }
+
+  // ─── SHOP DATA ─────────────────────────────────────────────────────────────
+  // sell = what server pays you, buy = what you pay server, amount = qty per transaction
+  // dynamic: true = price fluctuates, buyOnly: true = cannot sell to server
+  const SHOP = {
+    mining: {
+      name:'Mining', emoji:'⛏️', desc:'Ores, stones & gems',
+      items:[
+        {name:'Cobblestone',       img:'block/cobblestone',      amt:32, sell:16,  buy:40},
+        {name:'Stone',             img:'block/stone',            amt:32, sell:20,  buy:50},
+        {name:'Andesite',          img:'block/andesite',         amt:32, sell:16,  buy:40},
+        {name:'Diorite',           img:'block/diorite',          amt:32, sell:16,  buy:40},
+        {name:'Granite',           img:'block/granite',          amt:32, sell:16,  buy:40},
+        {name:'Deepslate',         img:'block/deepslate',        amt:32, sell:20,  buy:50},
+        {name:'Tuff',              img:'block/tuff',             amt:32, sell:16,  buy:40},
+        {name:'Calcite',           img:'block/calcite',          amt:32, sell:20,  buy:50},
+        {name:'Dripstone Block',   img:'block/dripstone_block',  amt:32, sell:16,  buy:40},
+        {name:'Basalt',            img:'block/basalt_side',      amt:32, sell:16,  buy:40},
+        {name:'Blackstone',        img:'block/blackstone',       amt:32, sell:16,  buy:40},
+        {name:'Netherrack',        img:'block/netherrack',       amt:32, sell:8,   buy:20},
+        {name:'End Stone',         img:'block/end_stone',        amt:32, sell:20,  buy:50},
+        {name:'Obsidian',          img:'block/obsidian',         amt:8,  sell:40,  buy:100},
+        {name:'Coal',              img:'item/coal',              amt:16, sell:48,  buy:120},
+        {name:'Raw Copper',        img:'item/raw_copper',        amt:16, sell:32,  buy:80},
+        {name:'Raw Iron',          img:'item/raw_iron',          amt:16, sell:96,  buy:240},
+        {name:'Raw Gold',          img:'item/raw_gold',          amt:16, sell:192, buy:480},
+        {name:'Copper Ingot',      img:'item/copper_ingot',      amt:16, sell:40,  buy:100},
+        {name:'Iron Ingot',        img:'item/iron_ingot',        amt:8,  sell:64,  buy:160},
+        {name:'Gold Ingot',        img:'item/gold_ingot',        amt:8,  sell:120, buy:300},
+        {name:'Redstone',          img:'item/redstone',          amt:16, sell:32,  buy:80},
+        {name:'Lapis Lazuli',      img:'item/lapis_lazuli',      amt:16, sell:32,  buy:80},
+        {name:'Diamond',           img:'item/diamond',           amt:4,  sell:240, buy:600},
+        {name:'Emerald',           img:'item/emerald',           amt:4,  sell:160, buy:400},
+        {name:'Nether Quartz',     img:'item/quartz',            amt:16, sell:32,  buy:80},
+        {name:'Amethyst Shard',    img:'item/amethyst_shard',    amt:16, sell:48,  buy:120},
+        {name:'Amethyst Block',    img:'block/amethyst_block',   amt:16, sell:48,  buy:120},
+      ]
+    },
+    farming: {
+      name:'Farming', emoji:'🌾', desc:'Seeds, crops & plants', dynamic:true,
+      items:[
+        {name:'Wheat Seeds',       img:'item/wheat_seeds',           amt:16, sell:16, buy:40,  dynamic:true},
+        {name:'Carrot',            img:'item/carrot',                amt:16, sell:48, buy:120, dynamic:true},
+        {name:'Potato',            img:'item/potato',                amt:16, sell:32, buy:80},
+        {name:'Beetroot Seeds',    img:'item/beetroot_seeds',        amt:16, sell:16, buy:40},
+        {name:'Sugar Cane',        img:'item/sugar_cane',            amt:32, sell:48, buy:120},
+        {name:'Cocoa Beans',       img:'item/cocoa_beans',           amt:16, sell:32, buy:80},
+        {name:'Cactus',            img:'block/cactus_side',          amt:16, sell:16, buy:40},
+        {name:'Brown Mushroom',    img:'block/brown_mushroom',       amt:16, sell:32, buy:80},
+        {name:'Red Mushroom',      img:'block/red_mushroom',         amt:16, sell:32, buy:80},
+        {name:'Melon Seeds',       img:'item/melon_seeds',           amt:16, sell:16, buy:40},
+        {name:'Pumpkin Seeds',     img:'item/pumpkin_seeds',         amt:16, sell:16, buy:40},
+        {name:'Nether Wart',       img:'item/nether_wart',           amt:16, sell:32, buy:80},
+        {name:'Oak Sapling',       img:'block/oak_sapling',          amt:16, sell:24, buy:60},
+        {name:'Spruce Sapling',    img:'block/spruce_sapling',       amt:16, sell:24, buy:60},
+        {name:'Birch Sapling',     img:'block/birch_sapling',        amt:16, sell:24, buy:60},
+        {name:'Jungle Sapling',    img:'block/jungle_sapling',       amt:16, sell:24, buy:60},
+        {name:'Acacia Sapling',    img:'block/acacia_sapling',       amt:16, sell:24, buy:60},
+        {name:'Dark Oak Sapling',  img:'block/dark_oak_sapling',     amt:16, sell:24, buy:60},
+        {name:'Mangrove Propagule',img:'block/mangrove_propagule',   amt:16, sell:28, buy:70},
+        {name:'Cherry Sapling',    img:'block/cherry_sapling',       amt:16, sell:30, buy:75},
+        {name:'Moss Block',        img:'block/moss_block',           amt:16, sell:24, buy:60},
+        {name:'Moss Carpet',       img:'block/moss_block',           amt:32, sell:16, buy:40},
+        {name:'Bamboo',            img:'item/bamboo',                amt:32, sell:16, buy:40},
+        {name:'Kelp',              img:'item/kelp',                  amt:32, sell:16, buy:40},
+        {name:'Glow Berries',      img:'item/glow_berries',          amt:16, sell:32, buy:80},
+        {name:'Azalea',            img:'block/azalea_top',           amt:16, sell:24, buy:60},
+        {name:'Flowering Azalea',  img:'block/flowering_azalea_top', amt:16, sell:28, buy:70},
+        {name:'Torchflower Seeds', img:'item/torchflower_seeds',     amt:16, sell:40, buy:100},
+        {name:'Torchflower',       img:'block/torchflower',          amt:8,  sell:40, buy:100},
+        {name:'Pitcher Pod',       img:'item/pitcher_pod',           amt:16, sell:40, buy:100},
+        {name:'Pitcher Plant',     img:'block/pitcher_crop_full',    amt:8,  sell:40, buy:100},
+        {name:'Pink Petals',       img:'block/pink_petals',          amt:16, sell:20, buy:50},
+        {name:'Big Dripleaf',      img:'block/big_dripleaf_top',     amt:12, sell:24, buy:60},
+        {name:'Small Dripleaf',    img:'item/small_dripleaf',        amt:16, sell:20, buy:50},
+        {name:'Hanging Roots',     img:'block/hanging_roots',        amt:16, sell:16, buy:40},
+        {name:'Spore Blossom',     img:'block/spore_blossom',        amt:8,  sell:32, buy:80},
+        {name:'Vine',              img:'block/vine',                 amt:16, sell:16, buy:40},
+        {name:'Lily Pad',          img:'item/lily_pad',              amt:16, sell:16, buy:40},
+        {name:'Sea Pickle',        img:'block/sea_pickle',           amt:16, sell:16, buy:40},
+        {name:'Seagrass',          img:'item/seagrass',              amt:32, sell:16, buy:40},
+        {name:'Glow Lichen',       img:'block/glow_lichen',          amt:16, sell:32, buy:80},
+        {name:'Weeping Vines',     img:'block/weeping_vines',        amt:16, sell:16, buy:40},
+        {name:'Twisting Vines',    img:'block/twisting_vines',       amt:16, sell:16, buy:40},
+        {name:'Nether Sprouts',    img:'block/nether_sprouts',       amt:16, sell:16, buy:40},
+      ]
+    },
+    food: {
+      name:'Food', emoji:'🍖', desc:'Cooked meats & produce',
+      items:[
+        {name:'Bread',           img:'item/bread',           amt:16, sell:32,  buy:80},
+        {name:'Cooked Beef',     img:'item/cooked_beef',     amt:16, sell:64,  buy:160},
+        {name:'Cooked Porkchop', img:'item/cooked_porkchop', amt:16, sell:64,  buy:160},
+        {name:'Cooked Chicken',  img:'item/cooked_chicken',  amt:16, sell:48,  buy:120},
+        {name:'Cooked Mutton',   img:'item/cooked_mutton',   amt:16, sell:48,  buy:120},
+        {name:'Cooked Cod',      img:'item/cooked_cod',      amt:16, sell:40,  buy:100},
+        {name:'Cooked Salmon',   img:'item/cooked_salmon',   amt:16, sell:48,  buy:120},
+        {name:'Baked Potato',    img:'item/baked_potato',    amt:16, sell:24,  buy:60},
+        {name:'Carrot',          img:'item/carrot',          amt:16, sell:48,  buy:120},
+        {name:'Potato',          img:'item/potato',          amt:16, sell:32,  buy:80},
+        {name:'Beetroot',        img:'item/beetroot',        amt:16, sell:32,  buy:80},
+        {name:'Melon Slice',     img:'item/melon_slice',     amt:16, sell:16,  buy:40},
+        {name:'Sweet Berries',   img:'item/sweet_berries',   amt:16, sell:24,  buy:60},
+        {name:'Pumpkin Pie',     img:'item/pumpkin_pie',     amt:16, sell:64,  buy:160},
+        {name:'Cookie',          img:'item/cookie',          amt:16, sell:24,  buy:60},
+        {name:'Honey Bottle',    img:'item/honey_bottle',    amt:16, sell:48,  buy:120},
+        {name:'Golden Carrot',   img:'item/golden_carrot',   amt:16, sell:80,  buy:200},
+      ]
+    },
+    building: {
+      name:'Building', emoji:'🧱', desc:'Stone, glass, clay & tuff',
+      items:[
+        {name:'Dirt',                img:'block/dirt',              amt:32, sell:10, buy:25},
+        {name:'Glass',               img:'block/glass',             amt:32, sell:12, buy:30},
+        {name:'Bricks',              img:'block/bricks',            amt:32, sell:16, buy:40},
+        {name:'Quartz Block',        img:'block/quartz_block_side', amt:16, sell:64, buy:160},
+        {name:'Obsidian',            img:'block/obsidian',          amt:8,  sell:40, buy:100},
+        {name:'Stone',               img:'block/stone',             amt:32, sell:20, buy:50},
+        {name:'Bucket',              img:'item/bucket',             amt:1,  sell:null, buy:50,  buyOnly:true},
+        {name:'Water Bucket',        img:'item/water_bucket',       amt:1,  sell:null, buy:75,  buyOnly:true},
+        {name:'Lava Bucket',         img:'item/lava_bucket',        amt:1,  sell:null, buy:80,  buyOnly:true},
+        {name:'Cobblestone',         img:'block/cobblestone',       amt:32, sell:16, buy:40},
+        {name:'Stone Bricks',        img:'block/stone_bricks',      amt:32, sell:20, buy:50},
+        {name:'Sand',                img:'block/sand',              amt:32, sell:12, buy:30},
+        {name:'Gravel',              img:'block/gravel',            amt:32, sell:10, buy:25},
+        {name:'Clay',                img:'block/clay',              amt:16, sell:16, buy:40},
+        {name:'Terracotta',          img:'block/terracotta',        amt:16, sell:20, buy:50},
+        {name:'Magma Block',         img:'block/magma',             amt:16, sell:24, buy:60},
+        {name:'Tuff',                img:'block/tuff',              amt:32, sell:16, buy:40},
+        {name:'Polished Tuff',       img:'block/polished_tuff',     amt:32, sell:20, buy:50},
+        {name:'Tuff Bricks',         img:'block/tuff_bricks',       amt:32, sell:20, buy:50},
+        {name:'Chiseled Tuff',       img:'block/chiseled_tuff',     amt:32, sell:20, buy:50},
+        {name:'Chiseled Tuff Bricks',img:'block/chiseled_tuff_bricks',amt:32,sell:24,buy:60},
+        {name:'Polished Tuff Stairs',img:'block/polished_tuff',     amt:16, sell:20, buy:50},
+        {name:'Tuff Brick Stairs',   img:'block/tuff_bricks',       amt:16, sell:24, buy:60},
+      ]
+    },
+    wood: {
+      name:'Wood', emoji:'🪵', desc:'All log types',
+      items:[
+        {name:'Oak Log',      img:'block/oak_log',      amt:16, sell:8,  buy:20},
+        {name:'Spruce Log',   img:'block/spruce_log',   amt:16, sell:8,  buy:20},
+        {name:'Birch Log',    img:'block/birch_log',    amt:16, sell:8,  buy:20},
+        {name:'Jungle Log',   img:'block/jungle_log',   amt:16, sell:10, buy:25},
+        {name:'Acacia Log',   img:'block/acacia_log',   amt:16, sell:10, buy:25},
+        {name:'Dark Oak Log', img:'block/dark_oak_log', amt:16, sell:10, buy:25},
+        {name:'Mangrove Log', img:'block/mangrove_log', amt:16, sell:10, buy:25},
+        {name:'Pale Oak Log', img:'block/pale_oak_log', amt:16, sell:12, buy:30},
+        {name:'Cherry Log',   img:'block/cherry_log',   amt:16, sell:12, buy:30},
+      ]
+    },
+    fishing: {
+      name:'Fishing', emoji:'🎣', desc:'Fish, shells & ink sacs',
+      items:[
+        {name:'Cod',            img:'item/cod',            amt:16, sell:16,  buy:40},
+        {name:'Salmon',         img:'item/salmon',         amt:16, sell:20,  buy:50},
+        {name:'Tropical Fish',  img:'item/tropical_fish',  amt:16, sell:24,  buy:60},
+        {name:'Pufferfish',     img:'item/pufferfish',     amt:16, sell:24,  buy:60},
+        {name:'Ink Sac',        img:'item/ink_sac',        amt:16, sell:32,  buy:80},
+        {name:'Glow Ink Sac',   img:'item/glow_ink_sac',   amt:16, sell:40,  buy:100},
+        {name:'Nautilus Shell', img:'item/nautilus_shell', amt:8,  sell:150, buy:375},
+      ]
+    },
+    mob_drops: {
+      name:'Mob Drops', emoji:'⚔️', desc:'Bones, pearls & rare drops',
+      items:[
+        {name:'Bone',              img:'item/bone',              amt:16, sell:32,  buy:80},
+        {name:'String',            img:'item/string',            amt:16, sell:32,  buy:80},
+        {name:'Rotten Flesh',      img:'item/rotten_flesh',      amt:16, sell:8,   buy:20},
+        {name:'Gunpowder',         img:'item/gunpowder',         amt:16, sell:64,  buy:160},
+        {name:'Ghast Tear',        img:'item/ghast_tear',        amt:8,  sell:120, buy:300},
+        {name:'Ender Pearl',       img:'item/ender_pearl',       amt:8,  sell:80,  buy:200},
+        {name:'Blaze Rod',         img:'item/blaze_rod',         amt:8,  sell:64,  buy:160},
+        {name:'Slimeball',         img:'item/slime_ball',        amt:8,  sell:40,  buy:100},
+        {name:'Phantom Membrane',  img:'item/phantom_membrane',  amt:8,  sell:80,  buy:200},
+      ]
+    },
+    redstone: {
+      name:'Redstone', emoji:'🔴', desc:'Pistons, hoppers & copper',
+      items:[
+        {name:'Redstone Dust',          img:'item/redstone',                   amt:32, sell:32,  buy:80},
+        {name:'Redstone Torch',         img:'block/redstone_torch',            amt:16, sell:16,  buy:40},
+        {name:'Repeater',               img:'item/repeater',                   amt:8,  sell:32,  buy:80},
+        {name:'Comparator',             img:'item/comparator',                 amt:8,  sell:48,  buy:120},
+        {name:'Observer',               img:'block/observer_front',            amt:8,  sell:40,  buy:100},
+        {name:'Piston',                 img:'block/piston_top_normal',         amt:8,  sell:40,  buy:100},
+        {name:'Sticky Piston',          img:'block/piston_top_sticky',         amt:8,  sell:48,  buy:120},
+        {name:'Dropper',                img:'block/dropper_front_vertical',    amt:8,  sell:24,  buy:60},
+        {name:'Dispenser',              img:'block/dispenser_front_vertical',  amt:8,  sell:32,  buy:80},
+        {name:'Hopper',                 img:'item/hopper',                     amt:4,  sell:40,  buy:100},
+        {name:'Target',                 img:'block/target_top',                amt:8,  sell:24,  buy:60},
+        {name:'Daylight Detector',      img:'block/daylight_detector_top',     amt:8,  sell:32,  buy:80},
+        {name:'Crafter',                img:'block/crafter_front',             amt:4,  sell:120, buy:300},
+        {name:'Redstone Lamp',          img:'block/redstone_lamp',             amt:8,  sell:24,  buy:60},
+        {name:'Copper Bulb',            img:'block/copper_bulb',               amt:4,  sell:20,  buy:50},
+        {name:'Exposed Copper Bulb',    img:'block/exposed_copper_bulb',       amt:4,  sell:20,  buy:50},
+        {name:'Weathered Copper Bulb',  img:'block/weathered_copper_bulb',     amt:4,  sell:20,  buy:50},
+        {name:'Oxidized Copper Bulb',   img:'block/oxidized_copper_bulb',      amt:4,  sell:20,  buy:50},
+        {name:'Waxed Copper Bulb',      img:'block/waxed_copper_bulb',         amt:4,  sell:20,  buy:50},
+        {name:'Waxed Exposed Bulb',     img:'block/waxed_exposed_copper_bulb', amt:4,  sell:20,  buy:50},
+        {name:'Waxed Weathered Bulb',   img:'block/waxed_weathered_copper_bulb',amt:4, sell:20,  buy:50},
+        {name:'Waxed Oxidized Bulb',    img:'block/waxed_oxidized_copper_bulb',amt:4,  sell:20,  buy:50},
+        {name:'Copper Door',            img:'item/copper_door',                amt:4,  sell:40,  buy:100},
+        {name:'Copper Trapdoor',        img:'item/copper_trapdoor',            amt:4,  sell:40,  buy:100},
+        {name:'Copper Grate',           img:'block/copper_grate',              amt:4,  sell:32,  buy:80},
+      ]
+    },
+    valuables: {
+      name:'Valuables', emoji:'💎', desc:'Rare & legendary items',
+      items:[
+        {name:'Emerald',               img:'item/emerald',               amt:4,  sell:160, buy:400},
+        {name:'Lapis Lazuli',          img:'item/lapis_lazuli',          amt:16, sell:32,  buy:80},
+        {name:'Bottle o\' Enchanting', img:'item/experience_bottle',     amt:16, sell:null, buy:110,  buyOnly:true},
+        {name:'Ancient Debris',        img:'block/ancient_debris_top',   amt:2,  sell:400, buy:1000},
+        {name:'Heart of the Sea',      img:'item/heart_of_the_sea',      amt:1,  sell:150, buy:375},
+        {name:'Breeze Rod',            img:'item/breeze_rod',            amt:4,  sell:200, buy:500},
+        {name:'Wind Charge',           img:'item/wind_charge',           amt:16, sell:80,  buy:200},
+        {name:'Enchanted Golden Apple',img:'item/enchanted_golden_apple',amt:1,  sell:null, buy:1250, buyOnly:true},
+        {name:'Netherite Scrap',       img:'item/netherite_scrap',       amt:2,  sell:160, buy:400},
+        {name:'Beacon',                img:'block/beacon',               amt:1,  sell:null, buy:4000, buyOnly:true},
+        {name:'Heavy Core',            img:'item/heavy_core',            amt:1,  sell:500, buy:1250},
+        {name:'Mace',                  img:'item/mace',                  amt:1,  sell:600, buy:1500},
+        {name:'Trial Key',             img:'item/trial_key',             amt:1,  sell:200, buy:500},
+        {name:'Ominous Trial Key',     img:'item/ominous_trial_key',     amt:1,  sell:400, buy:1000},
+        {name:'Wolf Armor',            img:'item/wolf_armor',            amt:1,  sell:100, buy:250},
+        {name:'Armadillo Scute',       img:'item/armadillo_scute',       amt:8,  sell:40,  buy:100},
+      ]
+    },
+    decorations: {
+      name:'Decorations', emoji:'🎴', desc:'Lanterns, frames & lighting',
+      items:[
+        {name:'Flower Pot',  img:'item/flower_pot',  amt:8,  sell:16, buy:40},
+        {name:'Lantern',     img:'block/lantern',    amt:8,  sell:20, buy:50},
+        {name:'Soul Lantern',img:'block/soul_lantern',amt:8, sell:24, buy:60},
+        {name:'Painting',    img:'item/painting',    amt:4,  sell:16, buy:40},
+        {name:'Item Frame',  img:'item/item_frame',  amt:8,  sell:20, buy:50},
+        {name:'Glowstone',   img:'block/glowstone',  amt:16, sell:32, buy:80},
+        {name:'Sea Lantern', img:'block/sea_lantern',amt:8,  sell:40, buy:100},
+      ]
+    },
+    enchantments: {
+      name:'Enchantments', emoji:'📚', desc:'Top-tier enchanted books',
+      items:[
+        {name:'Sharpness V',    img:'item/enchanted_book', amt:1, sell:null, buy:6000,  buyOnly:true},
+        {name:'Fortune III',    img:'item/enchanted_book', amt:1, sell:null, buy:7000,  buyOnly:true},
+        {name:'Silk Touch',     img:'item/enchanted_book', amt:1, sell:null, buy:5000,  buyOnly:true},
+        {name:'Efficiency V',   img:'item/enchanted_book', amt:1, sell:null, buy:6000,  buyOnly:true},
+        {name:'Protection IV',  img:'item/enchanted_book', amt:1, sell:null, buy:5000,  buyOnly:true},
+        {name:'Unbreaking III', img:'item/enchanted_book', amt:1, sell:null, buy:4500,  buyOnly:true},
+        {name:'Mending',        img:'item/enchanted_book', amt:1, sell:null, buy:10000, buyOnly:true},
+        {name:'Looting III',    img:'item/enchanted_book', amt:1, sell:null, buy:5500,  buyOnly:true},
+        {name:'Power V',        img:'item/enchanted_book', amt:1, sell:null, buy:4500,  buyOnly:true},
+      ]
+    },
+    spawners: {
+      name:'Spawners', emoji:'🌀', desc:'Mob spawners (luxury)',
+      items:[
+        {name:'Chicken Spawner',  img:'block/spawner', amt:1, sell:null, buy:50000,  buyOnly:true},
+        {name:'Pig Spawner',      img:'block/spawner', amt:1, sell:null, buy:55000,  buyOnly:true},
+        {name:'Cow Spawner',      img:'block/spawner', amt:1, sell:null, buy:60000,  buyOnly:true},
+        {name:'Spider Spawner',   img:'block/spawner', amt:1, sell:null, buy:70000,  buyOnly:true},
+        {name:'Zombie Spawner',   img:'block/spawner', amt:1, sell:null, buy:75000,  buyOnly:true},
+        {name:'Skeleton Spawner', img:'block/spawner', amt:1, sell:null, buy:80000,  buyOnly:true},
+        {name:'Blaze Spawner',    img:'block/spawner', amt:1, sell:null, buy:100000, buyOnly:true},
+        {name:'Witch Spawner',    img:'block/spawner', amt:1, sell:null, buy:120000, buyOnly:true},
+        {name:'Guardian Spawner', img:'block/spawner', amt:1, sell:null, buy:140000, buyOnly:true},
+      ]
+    },
+    daily_specials: {
+      name:'Daily Specials', emoji:'⭐', desc:'Rotating limited offers', dynamic:true,
+      items:[
+        {name:'Harvest Bundle (Carrots ×32)', img:'item/carrot',       amt:32, sell:96, buy:240, dynamic:true},
+        {name:'Seasonal Treats (Honey ×12)',  img:'item/honey_bottle', amt:12, sell:36, buy:90,  dynamic:true},
+        {name:'Premium Pick (Bone Meal ×16)', img:'item/bone_meal',    amt:16, sell:16, buy:40,  dynamic:true},
+      ]
+    },
+  };
+
+  // ─── FLATTEN ALL ITEMS ─────────────────────────────────────────────────────
+  const ALL_ITEMS = [];
+  for (const [key, cat] of Object.entries(SHOP)) {
+    cat.items.forEach(it => ALL_ITEMS.push({...it, catKey:key, catName:cat.name, catEmoji:cat.emoji}));
+  }
+
+  // ─── BUILD CATEGORY GRID ───────────────────────────────────────────────────
+  const catGrid = document.getElementById('catGrid');
+  for (const [key, cat] of Object.entries(SHOP)) {
+    const card = document.createElement('div');
+    card.className = 'shop-cat-card';
+    card.innerHTML = `
+      <span class="cat-emoji">${cat.emoji}</span>
+      <div class="cat-name">${cat.name}</div>
+      <div class="cat-count">${cat.items.length} items</div>
+      ${cat.dynamic ? '<div class="cat-dyn">⚡ Dynamic pricing</div>' : ''}
+    `;
+    card.addEventListener('click', () => openModal(key));
+    catGrid.appendChild(card);
+  }
+
+  // ─── RENDER TABLE ROWS ─────────────────────────────────────────────────────
+  function iconEl(imgPath) {
+    const i = document.createElement('img');
+    i.className = 'mc-icon';
+    i.src = tex(imgPath);
+    i.alt = '';
+    i.onerror = () => i.classList.add('err');
+    return i;
+  }
+
+  function renderRows(items, tbody) {
+    tbody.innerHTML = '';
+    if (!items.length) {
+      tbody.innerHTML = '<tr><td colspan="5" class="no-results">No items match your search.</td></tr>';
+      return;
+    }
+    items.forEach(it => {
+      const tr = document.createElement('tr');
+      // name cell
+      const tdName = document.createElement('td');
+      const cell = document.createElement('div');
+      cell.className = 'item-cell';
+      cell.appendChild(iconEl(it.img));
+      const lbl = document.createElement('span');
+      lbl.className = 'item-label';
+      lbl.textContent = it.name;
+      cell.appendChild(lbl);
+      tdName.appendChild(cell);
+      // qty
+      const tdAmt = document.createElement('td');
+      tdAmt.className = 'r';
+      tdAmt.textContent = '×' + it.amt;
+      // sell
+      const tdSell = document.createElement('td');
+      tdSell.className = it.sell != null ? 'r sell-val' : 'r sell-none';
+      tdSell.textContent = it.sell != null ? fmt(it.sell) : '—';
+      // buy
+      const tdBuy = document.createElement('td');
+      tdBuy.className = 'r buy-val';
+      tdBuy.textContent = fmt(it.buy);
+      // tags
+      const tdTags = document.createElement('td');
+      tdTags.className = 'r';
+      if (it.dynamic)  tdTags.innerHTML += '<span class="tag tag-dyn">⚡</span>';
+      if (it.buyOnly)  tdTags.innerHTML += '<span class="tag tag-lock">🔒</span>';
+
+      tr.append(tdName, tdAmt, tdSell, tdBuy, tdTags);
+      tbody.appendChild(tr);
+    });
+  }
+
+  // ─── MODAL LOGIC ───────────────────────────────────────────────────────────
+  let currentCatKey = null;
+  const overlay   = document.getElementById('shopModal');
+  const modalEmoji = document.getElementById('modalEmoji');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalCount = document.getElementById('modalCount');
+  const modalSearch = document.getElementById('modalSearch');
+  const modalItems  = document.getElementById('modalItems');
+
+  function openModal(key) {
+    currentCatKey = key;
+    const cat = SHOP[key];
+    modalEmoji.textContent = cat.emoji;
+    modalTitle.textContent = cat.name;
+    modalCount.textContent = cat.items.length + ' ITEMS';
+    modalSearch.value = '';
+    renderRows(cat.items, modalItems);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => modalSearch.focus(), 80);
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    currentCatKey = null;
+  }
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  modalSearch.addEventListener('input', () => {
+    if (!currentCatKey) return;
+    const q = modalSearch.value.trim().toLowerCase();
+    const items = q
+      ? SHOP[currentCatKey].items.filter(it => it.name.toLowerCase().includes(q))
+      : SHOP[currentCatKey].items;
+    renderRows(items, modalItems);
+  });
+
+  // ─── GLOBAL SEARCH ─────────────────────────────────────────────────────────
+  const globalInput   = document.getElementById('globalSearch');
+  const globalResults = document.getElementById('globalResults');
+
+  globalInput.addEventListener('input', () => {
+    const q = globalInput.value.trim().toLowerCase();
+    globalResults.innerHTML = '';
+    if (!q) { globalResults.classList.remove('visible'); return; }
+
+    const hits = ALL_ITEMS.filter(it => it.name.toLowerCase().includes(q)).slice(0, 30);
+    if (!hits.length) {
+      globalResults.innerHTML = '<div class="gsr-none">No items found for "' + globalInput.value.trim() + '"</div>';
+    } else {
+      const header = document.createElement('div');
+      header.className = 'gsr-header';
+      header.textContent = hits.length + ' result' + (hits.length !== 1 ? 's' : '');
+      globalResults.appendChild(header);
+      hits.forEach(it => {
+        const row = document.createElement('div');
+        row.className = 'gsr-row';
+        const icon = iconEl(it.img);
+        icon.className = 'gsr-icon';
+        const name = document.createElement('span');
+        name.className = 'gsr-name';
+        name.textContent = it.name;
+        const cat = document.createElement('span');
+        cat.className = 'gsr-cat';
+        cat.textContent = it.catEmoji + ' ' + it.catName;
+        const sell = document.createElement('span');
+        sell.className = 'gsr-sell';
+        sell.textContent = it.sell != null ? fmt(it.sell) + ' sell' : '—';
+        const buy = document.createElement('span');
+        buy.className = 'gsr-buy';
+        buy.textContent = fmt(it.buy) + ' buy';
+        row.append(icon, name, cat, sell, buy);
+        row.addEventListener('click', () => {
+          globalInput.value = '';
+          globalResults.classList.remove('visible');
+          openModal(it.catKey);
+          setTimeout(() => {
+            modalSearch.value = it.name;
+            modalSearch.dispatchEvent(new Event('input'));
+          }, 80);
+        });
+        globalResults.appendChild(row);
+      });
+    }
+    globalResults.classList.add('visible');
+  });
+
+  document.addEventListener('click', e => {
+    if (!globalInput.contains(e.target) && !globalResults.contains(e.target)) {
+      globalResults.classList.remove('visible');
+    }
+  });
+  </script>
+</body>
+</html>
