@@ -12,6 +12,7 @@
     html { scroll-behavior: smooth; }
     body { background: var(--navy); color: var(--white); font-family: 'Crimson Pro', Georgia, serif; font-size: 18px; line-height: 1.7; overflow-x: hidden; }
     body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6) 0%, transparent 100%), radial-gradient(1px 1px at 75% 60%, rgba(255,255,255,0.4) 0%, transparent 100%), radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.3) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(8,14,26,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(240,168,48,0.15); }
     .nav-logo { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; text-decoration: none; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
@@ -19,41 +20,53 @@
     .nav-links a:hover, .nav-links a.active { color: var(--gold); }
     .nav-discord { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--navy); background: var(--gold); padding: 0.5rem 1.4rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.2s; }
     .nav-discord:hover { background: var(--gold-light); transform: translateY(-1px); }
+
     .page-hero { position: relative; z-index: 1; padding: 10rem 2rem 5rem; text-align: center; }
     .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, transparent, var(--navy)); pointer-events: none; }
     .page-eyebrow { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
     .page-hero h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; color: var(--white); margin-bottom: 1rem; }
     .page-hero h1 span { color: var(--gold); }
     .page-hero p { font-size: 1.2rem; color: var(--grey); font-style: italic; max-width: 600px; margin: 0 auto 2rem; }
+
     section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
     .section-label { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
     .section-title { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
     .section-divider { width: 60px; height: 2px; background: var(--gold); margin-bottom: 2.5rem; opacity: 0.7; }
+
+    /* COMING SOON HERO */
     .cs-hero { text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, var(--navy-card) 0%, rgba(192,57,43,0.08) 100%); border: 1px solid rgba(192,57,43,0.2); border-radius: 12px; margin-bottom: 4rem; }
     .cs-hero .big-icon { font-size: 5rem; display: block; margin-bottom: 1.5rem; }
     .cs-hero h2 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 900; color: var(--white); margin-bottom: 1rem; }
     .cs-hero h2 span { color: var(--gold); }
     .cs-hero p { font-size: 1.1rem; color: var(--grey); max-width: 600px; margin: 0 auto 2rem; line-height: 1.8; }
+
+    /* FEATURES */
     .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     .feature-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; padding: 2rem 1.5rem; transition: border-color 0.2s, transform 0.2s; }
     .feature-card:hover { border-color: rgba(240,168,48,0.35); transform: translateY(-4px); }
     .feature-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
     .feature-title { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
     .feature-desc { font-size: 0.95rem; color: var(--grey); line-height: 1.6; }
+
+    /* PROMISE */
     .promise { background: linear-gradient(135deg, var(--navy-card) 0%, rgba(26,74,138,0.2) 100%); border: 1px solid var(--navy-border); border-radius: 12px; padding: 3.5rem; text-align: center; }
     .promise h2 { font-family: 'Cinzel', serif; font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 900; color: var(--white); margin-bottom: 1rem; }
     .promise h2 span { color: var(--gold); }
     .promise p { color: var(--grey); max-width: 600px; margin: 0 auto; line-height: 1.8; }
+
     .btn-secondary { font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); background: transparent; padding: 0.9rem 2.5rem; border-radius: 3px; text-decoration: none; border: 1px solid rgba(240,168,48,0.4); display: inline-block; transition: border-color 0.2s, background 0.2s, transform 0.15s; }
     .btn-secondary:hover { border-color: var(--gold); background: rgba(240,168,48,0.08); transform: translateY(-2px); }
+
     .sep { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--navy-border), transparent); margin: 0 auto; max-width: 1100px; }
+
     footer { position: relative; z-index: 1; border-top: 1px solid var(--navy-border); padding: 3rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-logo { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; }
     .footer-info { font-size: 0.85rem; color: var(--grey); text-align: center; }
     .footer-info span { color: var(--white); }
-    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--gold); }
+
     @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .features-grid { grid-template-columns: 1fr; } footer { flex-direction: column; text-align: center; } }
   </style>
 </head>
@@ -71,11 +84,13 @@
     </ul>
     <a href="https://discord.gg/xVwzz6EAhb" target="_blank" class="nav-discord">Join Discord</a>
   </nav>
+
   <div class="page-hero">
     <p class="page-eyebrow">CommonsMC Network</p>
     <h1>Citadel <span>Factions</span></h1>
     <p>Authentic no P2W factions. 2016–2018 style gameplay. Build your faction. Conquer all.</p>
   </div>
+
   <section>
     <div class="cs-hero">
       <span class="big-icon">⚔️</span>
@@ -83,6 +98,7 @@
       <p>We're building an authentic factions experience from the ground up — no pay-to-win, no modern bloat. Pure 2016–2018 style factions the way it was meant to be played.</p>
       <a href="https://discord.gg/xVwzz6EAhb" target="_blank" class="btn-secondary">Get Notified on Discord</a>
     </div>
+
     <p class="section-label">What to Expect</p>
     <h2 class="section-title">Built for the veterans.</h2>
     <div class="section-divider"></div>
@@ -95,6 +111,7 @@
       <div class="feature-card"><span class="feature-icon">🔗</span><div class="feature-title">Discord Integration</div><div class="feature-desc">Faction announcements, raid alerts, and server events all connected to the CommonsMC Discord.</div></div>
     </div>
   </section>
+
   <div class="sep"></div>
   <section>
     <div class="promise">
@@ -102,12 +119,13 @@
       <p>Citadel will never sell gameplay advantages. No donated gear, no purchased ranks that give combat bonuses, no pay-to-win of any kind. The only way to win on Citadel is to earn it. This is a promise we will never break.</p>
     </div>
   </section>
+
   <footer>
     <div class="footer-logo">COMMONS MC</div>
     <div class="footer-info"><span>play.commonsmc.net</span> · <span>commonsmc.net</span> · <span>citadelsmp.net</span><br/><span style="font-size:0.75rem; color:#444;">© 2026 CommonsMC.</span></div>
     <div class="footer-links">
       <a href="/">Home</a><a href="/survival/">Survival</a><a href="/skyblock/">Skyblock</a>
-      <a href="/citadel/">Citadel</a><a href="/wild/">Wild</a><a href="/economy/">Economy</a>
+      <a href="/wild/">Wild</a><a href="/economy/">Economy</a>
       <a href="/roadmap/">Roadmap</a><a href="/staff/">Staff</a>
       <a href="https://discord.gg/xVwzz6EAhb" target="_blank">Discord</a>
     </div>

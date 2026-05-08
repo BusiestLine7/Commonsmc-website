@@ -7,12 +7,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
   <style>
-    :root { --navy: #080e1a; --navy-card: #111e33; --navy-border: #1a2d4a; --gold: #f0a830; --gold-light: #ffe082; --gold-dim: #c97d10; --white: #f0ede8; --grey: #8a9ab5; }
+    :root {
+      --navy: #080e1a; --navy-mid: #0d1829; --navy-card: #111e33; --navy-border: #1a2d4a;
+      --gold: #f0a830; --gold-light: #ffe082; --gold-dim: #c97d10;
+      --white: #f0ede8; --grey: #8a9ab5; --green: #55aa55;
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { background: var(--navy); color: var(--white); font-family: 'Crimson Pro', Georgia, serif; font-size: 18px; line-height: 1.7; overflow-x: hidden; }
-    body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.6) 0%, transparent 100%), radial-gradient(1px 1px at 70% 55%, rgba(255,255,255,0.4) 0%, transparent 100%), radial-gradient(1px 1px at 45% 85%, rgba(255,255,255,0.3) 0%, transparent 100%); pointer-events: none; z-index: 0; }
-
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6) 0%, transparent 100%), radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,0.4) 0%, transparent 100%), radial-gradient(1.5px 1.5px at 40% 10%, rgba(255,255,255,0.5) 0%, transparent 100%), radial-gradient(1px 1px at 70% 35%, rgba(255,255,255,0.5) 0%, transparent 100%), radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,0.4) 0%, transparent 100%);
+      pointer-events: none; z-index: 0;
+    }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(8,14,26,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(240,168,48,0.15); }
     .nav-logo { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; text-decoration: none; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
@@ -21,40 +28,83 @@
     .nav-discord { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--navy); background: var(--gold); padding: 0.5rem 1.4rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.2s; }
     .nav-discord:hover { background: var(--gold-light); transform: translateY(-1px); }
 
-    .page-hero { position: relative; z-index: 1; padding: 10rem 2rem 5rem; text-align: center; }
+    /* PAGE HERO */
+    .page-hero {
+      position: relative; z-index: 1;
+      padding: 10rem 2rem 5rem;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(26,74,138,0.15) 0%, transparent 100%);
+    }
     .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, transparent, var(--navy)); pointer-events: none; }
     .page-eyebrow { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
     .page-hero h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; color: var(--white); margin-bottom: 1rem; }
     .page-hero h1 span { color: var(--gold); }
     .page-hero p { font-size: 1.2rem; color: var(--grey); font-style: italic; max-width: 600px; margin: 0 auto 2rem; }
+    .page-hero-badges { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .badge { font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; padding: 0.35rem 0.9rem; border-radius: 2px; text-transform: uppercase; }
+    .badge-live { background: rgba(85,170,85,0.2); color: var(--green); border: 1px solid rgba(85,170,85,0.4); }
+    .badge-info { background: rgba(255,255,255,0.05); color: var(--grey); border: 1px solid rgba(255,255,255,0.1); }
 
     section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
     .section-label { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
     .section-title { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
     .section-divider { width: 60px; height: 2px; background: var(--gold); margin-bottom: 2.5rem; opacity: 0.7; }
 
+    /* INFO GRID */
+    .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .info-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; padding: 1.5rem; text-align: center; }
+    .info-card-label { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey); margin-bottom: 0.4rem; }
+    .info-card-value { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+
+    /* FEATURES */
     .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     .feature-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; padding: 2rem 1.5rem; transition: border-color 0.2s, transform 0.2s; }
     .feature-card:hover { border-color: rgba(240,168,48,0.35); transform: translateY(-4px); }
     .feature-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
-    .feature-title { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .feature-title { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
     .feature-desc { font-size: 0.95rem; color: var(--grey); line-height: 1.6; }
 
-    .commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-    .command-group h3 { font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 700; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 1rem; }
+    /* COMMANDS */
+    .commands-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .command-group h3 { font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 700; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 1rem; text-transform: uppercase; }
     .command-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .command-list li { font-size: 0.9rem; color: var(--grey); display: flex; align-items: baseline; gap: 0.8rem; }
-    .cmd { font-family: 'Courier New', monospace; font-size: 0.82rem; color: var(--gold); background: rgba(240,168,48,0.1); padding: 0.15rem 0.5rem; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
+    .command-list li { display: flex; align-items: flex-start; gap: 0.8rem; font-size: 0.9rem; color: var(--grey); }
+    .cmd { font-family: 'Courier New', monospace; font-size: 0.8rem; color: var(--gold); background: rgba(240,168,48,0.08); border: 1px solid rgba(240,168,48,0.2); padding: 0.1rem 0.5rem; border-radius: 3px; white-space: nowrap; flex-shrink: 0; }
 
-    .rules-list { display: flex; flex-direction: column; gap: 1rem; }
-    .rule-item { display: flex; align-items: flex-start; gap: 1.2rem; padding: 1.2rem 1.5rem; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; }
-    .rule-num { font-family: 'Cinzel', serif; font-size: 0.7rem; font-weight: 700; color: var(--gold); letter-spacing: 0.1em; flex-shrink: 0; padding-top: 0.2rem; }
-    .rule-text { font-size: 0.95rem; color: var(--grey); line-height: 1.6; }
-    .rule-text strong { color: var(--white); }
+    /* RULES */
+    .rules-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+    .rules-list li { display: flex; align-items: flex-start; gap: 1rem; font-size: 1rem; color: var(--grey); line-height: 1.6; padding: 1rem 1.5rem; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 6px; }
+    .rules-list li:hover { border-color: rgba(240,168,48,0.2); }
+    .rule-num { font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; color: var(--gold); min-width: 24px; }
 
-    .info-box { background: linear-gradient(135deg, var(--navy-card) 0%, rgba(240,168,48,0.05) 100%); border: 1px solid rgba(240,168,48,0.2); border-radius: 10px; padding: 2rem 2.5rem; margin-bottom: 3rem; }
-    .info-box p { color: var(--grey); line-height: 1.8; font-size: 1rem; }
-    .info-box strong { color: var(--white); }
+    /* ROADMAP */
+    .roadmap-phases { display: flex; flex-direction: column; gap: 1.5rem; }
+    .phase-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-left: 3px solid var(--gold-dim); border-radius: 0 8px 8px 0; padding: 2rem 2.5rem; }
+    .phase-card.active { border-left-color: var(--gold); }
+    .phase-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .phase-badge { font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; padding: 0.3rem 0.8rem; border-radius: 2px; text-transform: uppercase; }
+    .phase-badge.current { background: rgba(240,168,48,0.2); color: var(--gold); border: 1px solid rgba(240,168,48,0.4); }
+    .phase-badge.soon { background: rgba(26,74,138,0.3); color: #6ab0ff; border: 1px solid rgba(106,176,255,0.3); }
+    .phase-badge.planned { background: rgba(255,255,255,0.05); color: var(--grey); border: 1px solid rgba(255,255,255,0.1); }
+    .phase-title { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); }
+    .phase-subtitle { font-style: italic; color: var(--grey); font-size: 0.9rem; margin-bottom: 1rem; }
+    .phase-items { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 2rem; }
+    .phase-items li { font-size: 0.9rem; color: var(--grey); display: flex; align-items: center; gap: 0.5rem; }
+    .phase-items li.done { color: var(--white); }
+    .phase-items li.done::before { content: '✓'; color: var(--gold); font-size: 0.8rem; }
+    .phase-items li.todo::before { content: '○'; color: #444; font-size: 0.8rem; }
+
+    /* PROMISE */
+    .promise-section { background: linear-gradient(135deg, var(--navy-card) 0%, rgba(26,74,138,0.2) 100%); border: 1px solid var(--navy-border); border-radius: 12px; padding: 4rem; text-align: center; }
+    .promise-section h2 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900; color: var(--white); margin-bottom: 1.5rem; }
+    .promise-section h2 span { color: var(--gold); }
+    .promise-section p { font-size: 1.15rem; color: var(--grey); max-width: 680px; margin: 0 auto 1rem; line-height: 1.8; font-style: italic; }
+
+    /* BUTTONS */
+    .btn-primary { font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--navy); background: var(--gold); padding: 0.9rem 2.5rem; border-radius: 3px; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-secondary { font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); background: transparent; padding: 0.9rem 2.5rem; border-radius: 3px; text-decoration: none; border: 1px solid rgba(240,168,48,0.4); cursor: pointer; transition: border-color 0.2s, background 0.2s, transform 0.15s; }
+    .btn-secondary:hover { border-color: var(--gold); background: rgba(240,168,48,0.08); transform: translateY(-2px); }
 
     .sep { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--navy-border), transparent); margin: 0 auto; max-width: 1100px; }
 
@@ -62,11 +112,19 @@
     .footer-logo { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; }
     .footer-info { font-size: 0.85rem; color: var(--grey); text-align: center; }
     .footer-info span { color: var(--white); }
-    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--gold); }
 
-    @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .features-grid { grid-template-columns: 1fr; } .commands-grid { grid-template-columns: 1fr; } footer { flex-direction: column; text-align: center; } }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .commands-grid { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr 1fr; }
+      .phase-items { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+      .promise-section { padding: 2.5rem 1.5rem; }
+    }
   </style>
 </head>
 <body>
@@ -87,103 +145,183 @@
   <div class="page-hero">
     <p class="page-eyebrow">CommonsMC Network</p>
     <h1>Commons <span>Survival</span></h1>
-    <p>A permanent community SMP. No resets, no pay-to-win, no nonsense — just Minecraft the way it should be.</p>
+    <p>A permanent community SMP. A forever world that grows alongside the people who call it home.</p>
+    <div class="page-hero-badges">
+      <span class="badge badge-live">● Live Now</span>
+      <span class="badge badge-info">Java 26.1.2</span>
+      <span class="badge badge-info">play.commonsmc.net</span>
+      <span class="badge badge-info">No P2W</span>
+      <span class="badge badge-info">Forever World</span>
+    </div>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <button class="btn-primary" onclick="navigator.clipboard.writeText('play.commonsmc.net')">Copy Server IP</button>
+      <a href="https://discord.gg/xVwzz6EAhb" target="_blank" class="btn-secondary">Join Discord</a>
+    </div>
   </div>
 
+  <!-- SERVER INFO -->
   <section>
-    <div class="info-box">
-      <p>Commons Survival is a <strong>forever world</strong> — the map will never reset. Every build, every claim, every chest shop you create becomes a permanent part of the server's history. The world only grows. It never starts over.</p>
-    </div>
-
-    <p class="section-label">Features</p>
-    <h2 class="section-title">Everything you need.</h2>
+    <p class="section-label">Server Details</p>
+    <h2 class="section-title">Everything you need to know.</h2>
     <div class="section-divider"></div>
-    <div class="features-grid">
-      <div class="feature-card"><span class="feature-icon">🏡</span><div class="feature-title">Land Claiming</div><div class="feature-desc">Protect your builds with GriefPrevention. Claim land, subdivide plots, and trust other players into your claim.</div></div>
-      <div class="feature-card"><span class="feature-icon">💰</span><div class="feature-title">Player Economy</div><div class="feature-desc">A fully player-driven market. Buy, sell, and trade with other players through chest shops anywhere in the world.</div></div>
-      <div class="feature-card"><span class="feature-icon">🏪</span><div class="feature-title">Admin Shop</div><div class="feature-desc">Server-run GUI shop for floor-price selling and emergency buying. Type /shop to browse all 13 categories.</div></div>
-      <div class="feature-card"><span class="feature-icon">🗺️</span><div class="feature-title">Warps</div><div class="feature-desc">Quick travel to spawn, the wild, and the nether. The spawn area doubles as the market hub.</div></div>
-      <div class="feature-card"><span class="feature-icon">🌙</span><div class="feature-title">Sleep Voting</div><div class="feature-desc">Only 30% of online players need to sleep to skip the night. No more waiting for that one player.</div></div>
-      <div class="feature-card"><span class="feature-icon">🔗</span><div class="feature-title">Discord Integration</div><div class="feature-desc">In-game chat bridged to Discord, join/leave notifications, death messages, and a live server status bot.</div></div>
-      <div class="feature-card"><span class="feature-icon">🏆</span><div class="feature-title">Leaderboards</div><div class="feature-desc">Kill/death rankings and longest survival records tracked and displayed in Discord with /leaderboard.</div></div>
-      <div class="feature-card"><span class="feature-icon">🛡️</span><div class="feature-title">No Pay to Win</div><div class="feature-desc">Zero gameplay advantages for sale. Ever. Ranks are earned through playtime and trust, not money.</div></div>
-      <div class="feature-card"><span class="feature-icon">⚡</span><div class="feature-title">Optimised Performance</div><div class="feature-desc">PaperMC with ClearLag and tuned settings. The server is built to stay fast even with lots of players online.</div></div>
+    <div class="info-grid">
+      <div class="info-card"><div class="info-card-label">Server IP</div><div class="info-card-value">play.commonsmc.net</div></div>
+      <div class="info-card"><div class="info-card-label">Version</div><div class="info-card-value">Java 26.1.2</div></div>
+      <div class="info-card"><div class="info-card-label">World Resets</div><div class="info-card-value">Never</div></div>
+      <div class="info-card"><div class="info-card-label">Pay to Win</div><div class="info-card-value">None. Ever.</div></div>
     </div>
   </section>
 
+  <!-- FEATURES -->
   <div class="sep"></div>
   <section>
-    <p class="section-label">Commands</p>
-    <h2 class="section-title">Get around quickly.</h2>
+    <p class="section-label">What We Offer</p>
+    <h2 class="section-title">Built for community.</h2>
+    <div class="section-divider"></div>
+    <div class="features-grid">
+      <div class="feature-card"><span class="feature-icon">🛡️</span><div class="feature-title">Land Claiming</div><div class="feature-desc">Protect your builds with GriefPrevention. Claim land with a golden shovel, trust friends, and keep your creations safe forever.</div></div>
+      <div class="feature-card"><span class="feature-icon">💰</span><div class="feature-title">Player Economy</div><div class="feature-desc">A fully player-driven economy. Buy and sell resources with chest shops, earn coins, and trade with the community.</div></div>
+      <div class="feature-card"><span class="feature-icon">⚔️</span><div class="feature-title">No Pay to Win</div><div class="feature-desc">Every advantage is earned in-game. Donations support the server but never provide gameplay advantages.</div></div>
+      <div class="feature-card"><span class="feature-icon">🏠</span><div class="feature-title">No Kits</div><div class="feature-desc">Start fresh and earn everything yourself. The satisfaction of real progression is preserved here.</div></div>
+      <div class="feature-card"><span class="feature-icon">💬</span><div class="feature-title">Discord Integration</div><div class="feature-desc">In-game chat mirrored to Discord, rank sync, death notifications, and server events all in one place.</div></div>
+      <div class="feature-card"><span class="feature-icon">🌍</span><div class="feature-title">Forever World</div><div class="feature-desc">This world never resets. Your builds, your history, your legacy — preserved permanently as the world expands.</div></div>
+      <div class="feature-card"><span class="feature-icon">🏪</span><div class="feature-title">Chest Shops</div><div class="feature-desc">Set up your own player shop with a simple chest and sign. Buy, sell, and build your empire.</div></div>
+      <div class="feature-card"><span class="feature-icon">🌙</span><div class="feature-title">Sleep System</div><div class="feature-desc">Only 30% of players need to sleep to skip the night. No more being held hostage by one AFK player.</div></div>
+      <div class="feature-card"><span class="feature-icon">🔗</span><div class="feature-title">Account Linking</div><div class="feature-desc">Link your Minecraft account to Discord with /discord link to unlock Member+ rank and exclusive perks.</div></div>
+    </div>
+  </section>
+
+  <!-- COMMANDS -->
+  <div class="sep"></div>
+  <section>
+    <p class="section-label">Getting Started</p>
+    <h2 class="section-title">Useful commands.</h2>
     <div class="section-divider"></div>
     <div class="commands-grid">
       <div class="command-group">
-        <h3>🏠 Homes & Travel</h3>
+        <h3>🏠 Homes & Teleport</h3>
         <ul class="command-list">
-          <li><span class="cmd">/sethome</span> Set your home point</li>
+          <li><span class="cmd">/sethome</span> Set your home location</li>
           <li><span class="cmd">/home</span> Teleport to your home</li>
-          <li><span class="cmd">/warp spawn</span> Teleport to spawn</li>
-          <li><span class="cmd">/warp wild</span> Random teleport into the wild</li>
-          <li><span class="cmd">/warp nether</span> Teleport to the nether hub</li>
+          <li><span class="cmd">/spawn</span> Teleport to server spawn</li>
           <li><span class="cmd">/tpa &lt;player&gt;</span> Request teleport to a player</li>
           <li><span class="cmd">/tpaccept</span> Accept a teleport request</li>
+          <li><span class="cmd">/tpdeny</span> Deny a teleport request</li>
+          <li><span class="cmd">/warp</span> View all available warps</li>
+        </ul>
+      </div>
+      <div class="command-group">
+        <h3>🛡️ Claims</h3>
+        <ul class="command-list">
+          <li><span class="cmd">/claim</span> Claim land (golden shovel)</li>
+          <li><span class="cmd">/abandonclaim</span> Remove your claim</li>
+          <li><span class="cmd">/trust &lt;player&gt;</span> Full access to your claim</li>
+          <li><span class="cmd">/containertrust &lt;player&gt;</span> Chest access only</li>
+          <li><span class="cmd">/accesstrust &lt;player&gt;</span> Doors & buttons only</li>
+          <li><span class="cmd">/untrust &lt;player&gt;</span> Remove trust</li>
+          <li><span class="cmd">/claimlist</span> View all your claims</li>
         </ul>
       </div>
       <div class="command-group">
         <h3>💰 Economy</h3>
         <ul class="command-list">
-          <li><span class="cmd">/balance</span> Check your coin balance</li>
-          <li><span class="cmd">/pay &lt;player&gt; &lt;amount&gt;</span> Send coins</li>
-          <li><span class="cmd">/sell hand</span> Sell the item you're holding</li>
-          <li><span class="cmd">/sell all</span> Sell your entire inventory</li>
-          <li><span class="cmd">/worth</span> Check an item's floor price</li>
-          <li><span class="cmd">/shop</span> Open the admin GUI shop</li>
-        </ul>
-      </div>
-      <div class="command-group">
-        <h3>🏪 Shops & Claims</h3>
-        <ul class="command-list">
-          <li><span class="cmd">/qs help</span> QuickShop help menu</li>
-          <li><span class="cmd">/qs find &lt;item&gt;</span> Find nearby player shops</li>
-          <li><span class="cmd">/claimlist</span> View your claims</li>
-          <li><span class="cmd">/trust &lt;player&gt;</span> Trust a player in your claim</li>
-          <li><span class="cmd">/abandonclaim</span> Delete a claim</li>
+          <li><span class="cmd">/balance</span> Check your balance</li>
+          <li><span class="cmd">/pay &lt;player&gt; &lt;amount&gt;</span> Pay a player</li>
+          <li><span class="cmd">/warp market</span> Visit the player market</li>
+          <li><span class="cmd">/worth &lt;item&gt;</span> Check item sell value</li>
         </ul>
       </div>
       <div class="command-group">
         <h3>💬 Social</h3>
         <ul class="command-list">
-          <li><span class="cmd">/msg &lt;player&gt;</span> Send a private message</li>
+          <li><span class="cmd">/msg &lt;player&gt;</span> Private message a player</li>
           <li><span class="cmd">/reply</span> Reply to last message</li>
-          <li><span class="cmd">/list</span> See who is online</li>
-          <li><span class="cmd">/helpop &lt;message&gt;</span> Message staff</li>
           <li><span class="cmd">/discord link</span> Link your Discord account</li>
+          <li><span class="cmd">/list</span> See online players</li>
+          <li><span class="cmd">/rules</span> View server rules</li>
+          <li><span class="cmd">/helpop</span> Contact online staff</li>
         </ul>
       </div>
     </div>
   </section>
 
+  <!-- RULES -->
   <div class="sep"></div>
   <section>
-    <p class="section-label">Rules</p>
-    <h2 class="section-title">Keep it fair.</h2>
+    <p class="section-label">Server Rules</p>
+    <h2 class="section-title">Play fair. Be kind.</h2>
     <div class="section-divider"></div>
-    <div class="rules-list">
-      <div class="rule-item"><div class="rule-num">01</div><div class="rule-text"><strong>No griefing.</strong> Don't destroy, steal from, or interfere with other players' builds or claims.</div></div>
-      <div class="rule-item"><div class="rule-num">02</div><div class="rule-text"><strong>No hacking or cheating.</strong> No clients that give gameplay advantages. No x-ray, no fly hacks, no auto-clickers.</div></div>
-      <div class="rule-item"><div class="rule-num">03</div><div class="rule-text"><strong>No harassment.</strong> Keep chat respectful. Targeted harassment, hate speech, and excessive toxicity will result in a mute or ban.</div></div>
-      <div class="rule-item"><div class="rule-num">04</div><div class="rule-text"><strong>No scamming.</strong> Trade fairly. Misleading shop descriptions, bait-and-switch deals, and dishonest trading are not allowed.</div></div>
-      <div class="rule-item"><div class="rule-num">05</div><div class="rule-text"><strong>No advertising.</strong> Don't advertise other servers or Discord servers in chat.</div></div>
-      <div class="rule-item"><div class="rule-num">06</div><div class="rule-text"><strong>No lag machines.</strong> Don't build machines intentionally designed to cause server lag. Staff will remove them without warning.</div></div>
+    <ol class="rules-list">
+      <li><span class="rule-num">01</span> Respect all players — harassment, hate speech, and discrimination are strictly prohibited.</li>
+      <li><span class="rule-num">02</span> No griefing or stealing from other players' claims.</li>
+      <li><span class="rule-num">03</span> No cheating, hacking, or using unauthorized mods or clients.</li>
+      <li><span class="rule-num">04</span> No spamming or excessive caps in chat.</li>
+      <li><span class="rule-num">05</span> No advertising other servers.</li>
+      <li><span class="rule-num">06</span> Keep chat appropriate — no NSFW content.</li>
+      <li><span class="rule-num">07</span> No exploiting bugs or glitches — report them to staff.</li>
+      <li><span class="rule-num">08</span> Respect staff decisions — appeals can be made via Discord.</li>
+      <li><span class="rule-num">09</span> No building inappropriate structures.</li>
+      <li><span class="rule-num">10</span> English in main chat please — use /msg for other languages.</li>
+      <li><span class="rule-num">11</span> PvP is only allowed with mutual consent outside of designated zones.</li>
+    </ol>
+  </section>
+
+  <!-- ROADMAP -->
+  <div class="sep"></div>
+  <section>
+    <p class="section-label">Development</p>
+    <h2 class="section-title">The Road Ahead.</h2>
+    <div class="section-divider"></div>
+    <div class="roadmap-phases">
+      <div class="phase-card active">
+        <div class="phase-header"><span class="phase-badge current">● Current</span><span class="phase-title">Phase 1 — Foundation</span></div>
+        <p class="phase-subtitle">The world begins. The community takes root.</p>
+        <ul class="phase-items">
+          <li class="done">Server launch on PaperMC 26.1.2</li><li class="done">Core plugins configured</li>
+          <li class="done">Discord integration</li><li class="done">Rank system (Member → Owner)</li>
+          <li class="done">Land claiming via GriefPrevention</li><li class="done">DDoS protection via TCPShield</li>
+          <li class="todo">Spawn area build</li><li class="todo">Economy worth.yml configured</li>
+          <li class="todo">Warp system (/warp spawn, market, wild)</li><li class="todo">Nether spawn structure</li>
+          <li class="todo">Member+ rank (Discord link reward)</li><li class="todo">Legacy player wall at spawn</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-header"><span class="phase-badge soon">◎ Coming Soon</span><span class="phase-title">Phase 2 — Community</span></div>
+        <p class="phase-subtitle">The commons grows. Players make it their own.</p>
+        <ul class="phase-items">
+          <li class="todo">Player market district open</li><li class="todo">Community events begin</li>
+          <li class="todo">Build contests</li><li class="todo">PvP tournaments</li>
+          <li class="todo">Castle Wars events</li><li class="todo">Treasure hunts</li>
+          <li class="todo">Dynmap live map</li><li class="todo">Staff team expanded</li>
+        </ul>
+      </div>
+      <div class="phase-card">
+        <div class="phase-header"><span class="phase-badge planned">◇ Planned</span><span class="phase-title">Phase 3 — Expansion</span></div>
+        <p class="phase-subtitle">New frontiers. New challenges.</p>
+        <ul class="phase-items">
+          <li class="todo">Season events (holidays, anniversaries)</li><li class="todo">End Dragon instanced fights</li>
+          <li class="todo">Public staff applications</li><li class="todo">CommonsMC content creator program</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMISE -->
+  <div class="sep"></div>
+  <section>
+    <div class="promise-section">
+      <h2>The <span>Forever World</span> Promise</h2>
+      <p>Commons Survival will never reset. Your builds, your claims, your history — preserved forever. As the game evolves, so does our world. New chunks generate with new updates, the map expands, and the community continues to shape the world together.</p>
+      <p style="font-style:normal; color: var(--white); font-family: 'Cinzel', serif; letter-spacing: 0.1em; font-size: 1rem; margin-top: 1rem;">This is your home.</p>
     </div>
   </section>
 
   <footer>
     <div class="footer-logo">COMMONS MC</div>
-    <div class="footer-info"><span>play.commonsmc.net</span> · <span>commonsmc.net</span><br/><span style="font-size:0.75rem; color:#444;">© 2026 CommonsMC. A forever world.</span></div>
+    <div class="footer-info"><span>play.commonsmc.net</span> · Java 26.1.2 · <span>commonsmc.net</span><br/><span style="font-size:0.75rem; color:#444;">© 2026 CommonsMC. A forever world.</span></div>
     <div class="footer-links">
-      <a href="/">Home</a><a href="/survival/">Survival</a><a href="/skyblock/">Skyblock</a>
-      <a href="/citadel/">Citadel</a><a href="/wild/">Wild</a><a href="/economy/">Economy</a>
+      <a href="/">Home</a><a href="/skyblock/">Skyblock</a><a href="/citadel/">Citadel</a>
+      <a href="/wild/">Wild</a><a href="/economy/">Economy</a>
       <a href="/roadmap/">Roadmap</a><a href="/staff/">Staff</a>
       <a href="https://discord.gg/xVwzz6EAhb" target="_blank">Discord</a>
     </div>

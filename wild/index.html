@@ -7,11 +7,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
   <style>
-    :root { --navy: #080e1a; --navy-card: #111e33; --navy-border: #1a2d4a; --gold: #f0a830; --gold-light: #ffe082; --gold-dim: #c97d10; --white: #f0ede8; --grey: #8a9ab5; }
+    :root { --navy: #080e1a; --navy-card: #111e33; --navy-border: #1a2d4a; --gold: #f0a830; --gold-light: #ffe082; --gold-dim: #c97d10; --white: #f0ede8; --grey: #8a9ab5; --red: #c0392b; --orange: #e67e22; }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { background: var(--navy); color: var(--white); font-family: 'Crimson Pro', Georgia, serif; font-size: 18px; line-height: 1.7; overflow-x: hidden; }
-    body::before { content: ''; position: fixed; inset: 0; background-image: radial-gradient(1px 1px at 10% 30%, rgba(255,255,255,0.6) 0%, transparent 100%), radial-gradient(1px 1px at 85% 65%, rgba(255,255,255,0.4) 0%, transparent 100%), radial-gradient(1px 1px at 55% 80%, rgba(255,255,255,0.3) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 15%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 50%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 85%, rgba(255,255,255,0.3) 0%, transparent 100%);
+      pointer-events: none; z-index: 0;
+    }
 
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(8,14,26,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(240,168,48,0.15); }
     .nav-logo { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; text-decoration: none; }
@@ -21,54 +30,105 @@
     .nav-discord { font-family: 'Cinzel', serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; color: var(--navy); background: var(--gold); padding: 0.5rem 1.4rem; border-radius: 3px; text-decoration: none; transition: background 0.2s, transform 0.2s; }
     .nav-discord:hover { background: var(--gold-light); transform: translateY(-1px); }
 
-    .page-hero { position: relative; z-index: 1; padding: 10rem 2rem 5rem; text-align: center; }
+    /* PAGE HERO */
+    .page-hero {
+      position: relative; z-index: 1;
+      padding: 10rem 2rem 5rem;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(192,57,43,0.08) 0%, transparent 100%);
+    }
     .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, transparent, var(--navy)); pointer-events: none; }
     .page-eyebrow { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
     .page-hero h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; color: var(--white); margin-bottom: 1rem; }
     .page-hero h1 span { color: var(--gold); }
-    .page-hero p { font-size: 1.2rem; color: var(--grey); font-style: italic; max-width: 600px; margin: 0 auto 2rem; }
+    .page-hero p { font-size: 1.2rem; color: var(--grey); font-style: italic; max-width: 620px; margin: 0 auto 2rem; line-height: 1.8; }
+    .badge { font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; padding: 0.35rem 0.9rem; border-radius: 2px; text-transform: uppercase; }
+    .badge-planned { background: rgba(255,255,255,0.06); color: var(--grey); border: 1px solid rgba(255,255,255,0.12); }
+    .badge-wild { background: rgba(230,126,34,0.15); color: #e8956a; border: 1px solid rgba(230,126,34,0.3); }
 
     section { position: relative; z-index: 1; padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
     .section-label { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
     .section-title { font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--white); margin-bottom: 1rem; line-height: 1.2; }
     .section-divider { width: 60px; height: 2px; background: var(--gold); margin-bottom: 2.5rem; opacity: 0.7; }
+    .sep { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--navy-border), transparent); margin: 0 auto; max-width: 1100px; }
 
-    .cs-hero { text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, var(--navy-card) 0%, rgba(85,170,85,0.06) 100%); border: 1px solid rgba(85,170,85,0.15); border-radius: 12px; margin-bottom: 4rem; }
+    /* COMING SOON */
+    .cs-hero { text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, var(--navy-card) 0%, rgba(192,57,43,0.08) 100%); border: 1px solid rgba(230,126,34,0.2); border-radius: 12px; margin-bottom: 4rem; }
     .cs-hero .big-icon { font-size: 5rem; display: block; margin-bottom: 1.5rem; }
     .cs-hero h2 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 900; color: var(--white); margin-bottom: 1rem; }
     .cs-hero h2 span { color: var(--gold); }
     .cs-hero p { font-size: 1.1rem; color: var(--grey); max-width: 600px; margin: 0 auto 2rem; line-height: 1.8; }
 
+    /* RULES — or lack thereof */
+    .rules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .rule-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; padding: 2rem 1.5rem; text-align: center; transition: border-color 0.2s, transform 0.2s; }
+    .rule-card:hover { border-color: rgba(230,126,34,0.3); transform: translateY(-3px); }
+    .rule-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+    .rule-title { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+    .rule-desc { font-size: 0.88rem; color: var(--grey); line-height: 1.6; }
+    .rule-card.allowed { border-top: 3px solid #55aa55; }
+    .rule-card.blocked { border-top: 3px solid #e05555; }
+    .rule-card.neutral { border-top: 3px solid var(--gold-dim); }
+
+    /* FEATURES */
     .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     .feature-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; padding: 2rem 1.5rem; transition: border-color 0.2s, transform 0.2s; }
-    .feature-card:hover { border-color: rgba(240,168,48,0.35); transform: translateY(-4px); }
+    .feature-card:hover { border-color: rgba(230,126,34,0.3); transform: translateY(-4px); }
     .feature-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
     .feature-title { font-family: 'Cinzel', serif; font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
-    .feature-desc { font-size: 0.95rem; color: var(--grey); line-height: 1.6; }
+    .feature-desc { font-size: 0.92rem; color: var(--grey); line-height: 1.6; }
 
-    .one-rule { background: linear-gradient(135deg, var(--navy-card) 0%, rgba(240,168,48,0.06) 100%); border: 1px solid rgba(240,168,48,0.25); border-radius: 12px; padding: 4rem; text-align: center; }
-    .one-rule h2 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 900; color: var(--white); margin-bottom: 1rem; }
-    .one-rule h2 span { color: var(--gold); }
-    .one-rule p { color: var(--grey); max-width: 550px; margin: 0 auto; line-height: 1.8; }
-    .rule-callout { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700; color: var(--gold); margin: 1.5rem 0; letter-spacing: 0.05em; }
+    /* WARNING BOX */
+    .warning-box { background: rgba(192,57,43,0.08); border: 1px solid rgba(192,57,43,0.3); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 2.5rem; }
+    .warning-box p { font-size: 0.95rem; color: var(--grey); line-height: 1.7; }
+    .warning-box p strong { color: #e08080; }
+
+    /* INFO BOX */
+    .info-box { background: rgba(240,168,48,0.06); border: 1px solid rgba(240,168,48,0.2); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 2rem; }
+    .info-box p { font-size: 0.95rem; color: var(--grey); line-height: 1.7; }
+    .info-box p strong { color: var(--white); }
+
+    /* FOREVER PROMISE */
+    .promise-section { background: linear-gradient(135deg, var(--navy-card) 0%, rgba(230,126,34,0.08) 100%); border: 1px solid rgba(230,126,34,0.2); border-radius: 12px; padding: 4rem; text-align: center; position: relative; overflow: hidden; }
+    .promise-section h2 { font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900; color: var(--white); margin-bottom: 1.5rem; }
+    .promise-section h2 span { color: var(--gold); }
+    .promise-section p { font-size: 1.15rem; color: var(--grey); max-width: 680px; margin: 0 auto 1rem; line-height: 1.8; font-style: italic; }
+
+    /* COMPARISON */
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .compare-card { background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 10px; padding: 2rem; }
+    .compare-card h3 { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+    .compare-card.survival h3 { color: #55aa55; }
+    .compare-card.wild h3 { color: #e8956a; }
+    .compare-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .compare-list li { font-size: 0.9rem; color: var(--grey); display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.5; }
+    .compare-list li::before { font-size: 0.8rem; flex-shrink: 0; margin-top: 0.15rem; }
+    .compare-card.survival .compare-list li::before { content: '✓'; color: #55aa55; }
+    .compare-card.wild .compare-list li::before { content: '◇'; color: #e8956a; }
 
     .btn-secondary { font-family: 'Cinzel', serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); background: transparent; padding: 0.9rem 2.5rem; border-radius: 3px; text-decoration: none; border: 1px solid rgba(240,168,48,0.4); display: inline-block; transition: border-color 0.2s, background 0.2s, transform 0.15s; }
     .btn-secondary:hover { border-color: var(--gold); background: rgba(240,168,48,0.08); transform: translateY(-2px); }
-
-    .sep { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--navy-border), transparent); margin: 0 auto; max-width: 1100px; }
 
     footer { position: relative; z-index: 1; border-top: 1px solid var(--navy-border); padding: 3rem 4rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-logo { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 700; color: var(--gold); letter-spacing: 0.15em; }
     .footer-info { font-size: 0.85rem; color: var(--grey); text-align: center; }
     .footer-info span { color: var(--white); }
-    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 1.5rem; }
     .footer-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--gold); }
 
-    @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .features-grid { grid-template-columns: 1fr; } footer { flex-direction: column; text-align: center; } }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; } .nav-links { display: none; }
+      .rules-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .compare-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+      .promise-section { padding: 2.5rem 1.5rem; }
+    }
   </style>
 </head>
 <body>
+
   <nav>
     <a href="/" class="nav-logo">COMMONS MC</a>
     <ul class="nav-links">
@@ -86,48 +146,168 @@
   <div class="page-hero">
     <p class="page-eyebrow">CommonsMC Network</p>
     <h1>Commons <span>Wild</span></h1>
-    <p>Vanilla Minecraft. No rules. No resets. One world, forever.</p>
+    <p>Pure vanilla survival. No rules. No claims. No protection. The world never resets — every scar, every ruin, every build is permanent history.</p>
+    <div style="display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
+      <span class="badge badge-planned">◇ Coming Soon</span>
+      <span class="badge badge-wild">🌋 Always Vanilla</span>
+      <span class="badge badge-wild">∞ No Resets. Ever.</span>
+    </div>
   </div>
 
   <section>
+    <!-- COMING SOON -->
     <div class="cs-hero">
-      <span class="big-icon">🌿</span>
-      <h2>Wild is <span>Coming</span></h2>
-      <p>Pure, unfiltered Minecraft survival. No economy, no claims, no staff intervention. The world accumulates history permanently — every raid, every build, every scar stays forever.</p>
+      <span class="big-icon">🌋</span>
+      <h2>Commons Wild is <span>Coming</span></h2>
+      <p>We're preparing the wild. No rules. No protection. No mercy. Join our Discord to be notified the moment the world opens — and be ready to survive.</p>
       <a href="https://discord.gg/xVwzz6EAhb" target="_blank" class="btn-secondary">Get Notified on Discord</a>
     </div>
 
-    <p class="section-label">What is Wild?</p>
-    <h2 class="section-title">Minecraft as nature intended.</h2>
+    <!-- WHAT IS COMMONS WILD -->
+    <p class="section-label">The Wild</p>
+    <h2 class="section-title">No rules. Just survival.</h2>
     <div class="section-divider"></div>
-    <div class="features-grid">
-      <div class="feature-card"><span class="feature-icon">🌍</span><div class="feature-title">Forever World</div><div class="feature-desc">The world never resets. Everything that happens on Wild — every base built, every base raided — becomes a permanent part of its history.</div></div>
-      <div class="feature-card"><span class="feature-icon">⚔️</span><div class="feature-title">Unrestricted PvP</div><div class="feature-desc">Full open-world PvP everywhere, all the time. No safe zones, no claims, no protection. Survive on your own terms.</div></div>
-      <div class="feature-card"><span class="feature-icon">🚫</span><div class="feature-title">No Economy</div><div class="feature-desc">No coins, no shops, no admin shop. Resources have real value because the only way to get them is to gather, trade, or take them.</div></div>
-      <div class="feature-card"><span class="feature-icon">🏗️</span><div class="feature-title">No Claims</div><div class="feature-desc">Nothing is protected by plugins. Build smart, build hidden, or build with allies. Your survival depends on you.</div></div>
-      <div class="feature-card"><span class="feature-icon">🔄</span><div class="feature-title">Always Updated</div><div class="feature-desc">Wild always runs the latest version of Minecraft. New biomes, new blocks, new mobs — available the moment they release.</div></div>
-      <div class="feature-card"><span class="feature-icon">🛡️</span><div class="feature-title">Anti-Cheat Only</div><div class="feature-desc">The only plugin running is anti-cheat. No gameplay modifications of any kind. As close to vanilla as a server can get.</div></div>
+
+    <div class="warning-box">
+      <p><strong>⚠️ Warning:</strong> Commons Wild is an unrestricted server. Griefing, raiding, stealing, and PvP are all permitted. Staff will not intervene in player disputes. Enter knowing that nothing is protected and no one is coming to help. The only rule is <strong>no cheating or hacking</strong> — everything else is fair game.</p>
+    </div>
+
+    <div class="rules-grid">
+      <div class="rule-card allowed">
+        <span class="rule-icon">✅</span>
+        <div class="rule-title">Griefing</div>
+        <div class="rule-desc">Destroy, loot, and raid anything you find. No claims protect anyone here.</div>
+      </div>
+      <div class="rule-card allowed">
+        <span class="rule-icon">✅</span>
+        <div class="rule-title">PvP Anywhere</div>
+        <div class="rule-desc">Kill on sight or form alliances — the choice is yours. PvP is always enabled everywhere.</div>
+      </div>
+      <div class="rule-card allowed">
+        <span class="rule-icon">✅</span>
+        <div class="rule-title">Stealing</div>
+        <div class="rule-desc">Found a base? It's yours for the taking. No chests are protected.</div>
+      </div>
+      <div class="rule-card allowed">
+        <span class="rule-icon">✅</span>
+        <div class="rule-title">Alliances & Betrayal</div>
+        <div class="rule-desc">Build alliances, form factions, and betray your allies. Trust no one.</div>
+      </div>
+      <div class="rule-card allowed">
+        <span class="rule-icon">✅</span>
+        <div class="rule-title">Build Anywhere</div>
+        <div class="rule-desc">No spawn protection, no build limits. Claim any land simply by being there.</div>
+      </div>
+      <div class="rule-card blocked">
+        <span class="rule-icon">❌</span>
+        <div class="rule-title">No Hacking or Cheats</div>
+        <div class="rule-desc">The one and only rule. No hacked clients, no exploits, no cheats. Play vanilla.</div>
+      </div>
     </div>
   </section>
 
+  <!-- FEATURES -->
   <div class="sep"></div>
   <section>
-    <div class="one-rule">
-      <h2>One <span>Rule</span></h2>
-      <div class="rule-callout">No hacking or cheating.</div>
-      <p>That's it. That's the only rule on Commons Wild. Everything else — raiding, stealing, PKing, building, alliances, betrayals — is fair game. The world is yours to shape however you choose.</p>
+    <p class="section-label">What Makes It Wild</p>
+    <h2 class="section-title">The world remembers everything.</h2>
+    <div class="section-divider"></div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">🌋</span>
+        <div class="feature-title">Pure Vanilla</div>
+        <div class="feature-desc">No plugins changing gameplay. No economy, no claims, no warps. Just Minecraft exactly as Mojang intended — raw and unfiltered.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">∞</span>
+        <div class="feature-title">Never Resets</div>
+        <div class="feature-desc">The world never resets. Ever. Every ruined base, every crater, every abandoned build stays in the world permanently as living history.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🔄</span>
+        <div class="feature-title">Always Updated</div>
+        <div class="feature-desc">The world always runs the latest Minecraft version. New biomes and chunks generate as the game updates — the world grows forever.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🛡️</span>
+        <div class="feature-title">Anti-Cheat Only</div>
+        <div class="feature-desc">The only plugin running is anti-cheat and TCPShield for DDoS protection. Nothing else touches the vanilla experience.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">👁️</span>
+        <div class="feature-title">No Staff Intervention</div>
+        <div class="feature-desc">Staff will not intervene in gameplay disputes. What happens in the wild stays in the wild. You are on your own.</div>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📖</span>
+        <div class="feature-title">The World Tells a Story</div>
+        <div class="feature-desc">Every ruin was once someone's home. Every crater was once a battle. The world accumulates history — and you're part of it.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SURVIVAL VS WILD -->
+  <div class="sep"></div>
+  <section>
+    <p class="section-label">Know Before You Choose</p>
+    <h2 class="section-title">Survival vs Wild.</h2>
+    <div class="section-divider"></div>
+    <div class="info-box">
+      <p>Not sure which server is right for you? Here's the key difference: <strong>Commons Survival</strong> is a community-first forever world with protection and economy. <strong>Commons Wild</strong> is a raw, lawless experience where nothing is safe and nothing is forgotten.</p>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-card survival">
+        <h3>🌿 Commons Survival</h3>
+        <ul class="compare-list">
+          <li>Land claiming — your builds are protected</li>
+          <li>Player economy and chest shops</li>
+          <li>Staff moderate the community</li>
+          <li>Rules enforced — griefing is banned</li>
+          <li>Community events and warps</li>
+          <li>PvP requires mutual consent</li>
+          <li>Forever world — safe and stable</li>
+        </ul>
+      </div>
+      <div class="compare-card wild">
+        <h3>🌋 Commons Wild</h3>
+        <ul class="compare-list">
+          <li>No claims — nothing is protected</li>
+          <li>No economy — pure vanilla resources</li>
+          <li>No staff intervention in gameplay</li>
+          <li>No rules — grief, raid, steal freely</li>
+          <li>No warps — walk or die</li>
+          <li>PvP always enabled everywhere</li>
+          <li>Forever world — raw and scarred</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOREVER PROMISE -->
+  <div class="sep"></div>
+  <section>
+    <div class="promise-section">
+      <h2>The <span>Wild</span> Promise</h2>
+      <p>Commons Wild will never reset. The world you enter today will still exist years from now — battered, scarred, and full of history. Every base built, every war fought, every ruin left behind becomes part of the permanent record.</p>
+      <p>As Minecraft updates, the world grows. New biomes generate at the frontier. The old lands remember everything.</p>
+      <p style="font-style:normal; color: var(--white); font-family: 'Cinzel', serif; letter-spacing: 0.1em; font-size: 1rem; margin-top: 1rem;">Survive. Or don't.</p>
     </div>
   </section>
 
   <footer>
     <div class="footer-logo">COMMONS MC</div>
-    <div class="footer-info"><span>play.commonsmc.net</span> · <span>commonsmc.net</span><br/><span style="font-size:0.75rem; color:#444;">© 2026 CommonsMC.</span></div>
+    <div class="footer-info"><span>play.commonsmc.net</span> · <span>commonsmc.net</span><br/><span style="font-size:0.75rem; color:#444;">© 2026 CommonsMC. A forever world.</span></div>
     <div class="footer-links">
-      <a href="/">Home</a><a href="/survival/">Survival</a><a href="/skyblock/">Skyblock</a>
-      <a href="/citadel/">Citadel</a><a href="/wild/">Wild</a><a href="/economy/">Economy</a>
-      <a href="/roadmap/">Roadmap</a><a href="/staff/">Staff</a>
+      <a href="/">Home</a>
+      <a href="/survival/">Survival</a>
+      <a href="/skyblock/">Skyblock</a>
+      <a href="/citadel/">Citadel</a>
+      <a href="/economy/">Economy</a>
+      <a href="/roadmap/">Roadmap</a>
+      <a href="/staff/">Staff</a>
       <a href="https://discord.gg/xVwzz6EAhb" target="_blank">Discord</a>
     </div>
   </footer>
+
 </body>
 </html>
